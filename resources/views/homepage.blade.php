@@ -52,10 +52,10 @@
             <center><h3 class="login-box-msg block-text text-center">FACILITIES MANAGEMENT FOR JOSE RIZAL UNIVERSITY</h3></center>
         </div>
         <div class="center">
-            <a type="button" class="btn btn-success btn-lg btn-block">TICKETING MAINTENANCE</a>
+            <a type="button"  class="btn btn-success btn-lg btn-block">TICKETING MAINTENANCE</a>
         </div>
         <div class="center">
-            <a type="button" class="btn btn-success btn-lg btn-block">RESERVATION FACILITIES</a>
+            <a type="button" href="{{ route('StudentLogin') }}" stlye='text-color: black;'class="btn btn-success btn-lg btn-block">RESERVATION FACILITIES</a>
         </div>
         <!-- /.login-card-body -->
     </div>
