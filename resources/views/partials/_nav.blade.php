@@ -8,7 +8,7 @@
         <li class="nav-item dropdown show">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="nav-link dropdown-toggle">Account Options</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <li><a href="#" class="dropdown-item">Account Logout</a></li>
+                <li><a href="{{ route('AccountLogout') }}" class="dropdown-item">Account Logout</a></li>
             </ul>
         </li>
     </ul>

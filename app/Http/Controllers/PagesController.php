@@ -15,14 +15,19 @@ class PagesController extends Controller
 
     public function viewStudentLogin(){
         if(Auth::check()){
-            return view('Dashboard');
+            return view('dashboard');
         }else{
             return view('Reservation.Loginpage');
         }
     }
 
     public function viewDashboard(){
-        return view('Dashboard');
+        return view('dashboard');
+    }
+
+    public function accountLogout(){
+        Auth::logout();
+        return view('Reservation.Loginpage');
     }
 
 

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 route::get('Homepage', ['uses' => 'PagesController@viewHomepage', 'as' => 'Homepage']);
 route::get('StudentLogin' ,['uses' => 'PagesController@viewStudentLogin' , 'as' => 'StudentLogin']);
 route::get('Dashboard' ,['uses' => 'PagesController@viewDashboard' , 'as' => 'Dashboard']);
-
+Route::get('AccountLogout', ['uses' => 'PagesController@accountLogout', 'as' => 'AccountLogout']);
 
 // User Controller
 Route::post('StudentRegister', ['uses' => 'UserController@postRegister', 'as' => 'StudentRegister']);

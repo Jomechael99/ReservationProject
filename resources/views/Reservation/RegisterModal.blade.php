@@ -14,20 +14,31 @@
                             <form id="studentForm" method="post">
                                 {{ csrf_field() }}
                                 <div class="row">
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label for="">First name</label>
                                         <input type="text" class="form-control" id="firstname" name="firstname" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label for="">Last name</label>
                                         <input type="text" class="form-control" id="lastname" name="lastname" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label for="">Email Address</label>
                                         <input type="email" class="form-control" id="emailaddress" name="emailaddress" placeholder="name@example.com">
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="">Type</label>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label for="">User Type</label>
+                                        <select class="form-control" id="studentType" name="userType">
+                                            <option value=""> Choose option </option>
+                                            <option value="1"> Staff </option>
+                                            <option value="2"> Teacher </option>
+                                            <option value="3"> Student </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="">Student Type</label>
                                         <select class="form-control" id="studentType" name="studentType">
                                             <option value=""> Choose option </option>
                                             <option value="1"> Elementary </option>
@@ -35,21 +46,22 @@
                                             <option value="3"> College </option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label for="">Organization</label>
                                         <input type="text" class="form-control" id="organization" name="organization" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-3">
+
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
                                         <label for="">Division</label>
                                         <input type="text" class="form-control" id="division" name="division" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label for="">Office</label>
                                         <input type="text" class="form-control" id="office" name="office" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label for="">Department</label>
                                         <input type="text" class="form-control" id="department" name="department" placeholder="">
                                     </div>

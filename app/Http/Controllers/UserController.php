@@ -23,6 +23,7 @@ class UserController extends Controller
             'department' => $data['department'],
             'email_address' => $data['emailaddress'],
             'student_type' => $data['studentType'],
+            'user_type' => $data['userType'],
             'username' => $data['username'],
             'password' => Hash::make($data['password'])
         ]);
@@ -50,7 +51,7 @@ class UserController extends Controller
     public function postLogin(Request $request){
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard');
+            return redirect()->route('Dashboard');
         }
     }
 }

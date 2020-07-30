@@ -19,6 +19,8 @@
             </div><!-- /.container-fluid -->
         </section>
 
+
+
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -29,23 +31,27 @@
                             <form id="scheduledForm">
                                 {{ csrf_field() }}
                                 <div class="card-body">
+                                    @foreach($schedule as $sched)
+                                    @endforeach
                                     <div class="row">
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group col-md-6">
                                             <label for="">Date Applied</label>
-                                            <input type="date" class="form-control" id="dateApplied" name="dateApplied" placeholder="Date Applied">
+                                            <input type="date" class="form-control" id="dateApplied" name="dateApplied" value="{{ $sched->reservation_date_applied }}" placeholder="Date Applied" readonly>
                                         </div>
-                                        {{--<div class="form-group col-md-6">
+                                        <div class="form-group col-md-6">
                                             <label for="">Date & Time EMO Request Receive ( For Emo Use Only ) </label>
-                                            <input type="datetime-local" class="form-control" name="datetimeEMO" id="datetimeEMO">
-                                        </div>--}}
+                                            <input type="datetime-local" class="form-control" name="datetimeEMO" id="datetimeEMO" readonly>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-12">
                                             <label for="">Place</label>
                                             <select class="form-control" id="scheduledPlace" name="scheduledPlace">
                                                 <option value=""> Choose option </option>
-                                                @foreach($place as $data)
-                                                    <option value="{{ $data -> id }}"> {{ $data -> place_name }}</option>
+
+                                                @foreach($place as $data2)
+
+                                                    <option value="{{ $data2 -> id }}" {{ ( $data2->id == $sched -> facility_id) ? 'selected' : '' }} readonly> {{ $data2 -> place_name }} </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -108,7 +114,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                         </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -126,68 +132,4 @@
 @endsection
 
 @section('scripts')
-
-    <script>
-        $(document).ready(function(){
-             $('#scheduledPlace').change(function(){
-                 var id = $('#scheduledPlace option:selected').val();
-                 if(id == "7"){
-                    $('#other_place_details').attr('hidden', false);
-                 }else{
-                     $('#other_place_details').attr('hidden', true);
-                 }
-             });
-
-             // control for additional facilities
-            var ctr = 1;
-            function add_additional(){
-
-                var facValue = $('#facilities').val();
-
-                var details = "<tr class='text-center'>" +
-                    "<td>" + ctr + "</td>" +
-                    "<td>" +facValue+" <input type='hidden' name='additional[]' value='"+facValue+"'></td>" +
-                    "<td width='5'><button type='button' class='form-control btn-danger btn btn-sm' id='remove'>-</button></td>"+
-                    "</tr>";
-
-                $('#additionTable').append(details);
-
-                ctr++;
-            }
-
-            $('#additionalButton').on('click', function(){
-                add_additional();
-            });
-
-            $(document).on('click', '#remove', function(){
-                $(this).closest('tr').remove();
-                ctr--;
-            })
-
-            function add_schedule_form(){
-                $.ajax({
-                    type:"POST",
-                    url: '{{ route('Schedule.store') }}',
-                    data: $('#scheduledForm').serialize(), // get all form field value in serialize form
-                    success: function(response){
-
-                        if(response.status == "success"){
-                            alert("Schedule Successfully Added");
-                            window.history.back();
-                        }else{
-                            alert("Schedule Not Added");
-                        }
-
-                    }
-                });
-            }
-
-            $('#btnSubmit').on('click', function(){
-                add_schedule_form();
-            });
-
-        });
-
-    </script>
-
 @endsection
