@@ -25,6 +25,7 @@ class UserController extends Controller
             'student_type' => $data['studentType'],
             'user_type' => $data['userType'],
             'username' => $data['username'],
+            'approver' => 0,
             'password' => Hash::make($data['password'])
         ]);
     }
@@ -44,7 +45,7 @@ class UserController extends Controller
 
         $check = $this->create($data);
 
-        return response()->json(array(['status' => "success"]));
+        return response()->json(array('status' => "success"));
 
     }
 
@@ -52,6 +53,8 @@ class UserController extends Controller
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->route('Dashboard');
+        }else{
+            return redirect()->route('StudentLogin');
         }
     }
 }

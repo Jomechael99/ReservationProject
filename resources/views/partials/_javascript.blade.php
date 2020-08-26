@@ -32,6 +32,8 @@
 <script src="{{ asset('js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('js/demo.js')}}"></script>
+<script src="{{ asset('js/sweetalert2.all.min.js')}}"></script>
+<script src="{{ asset('js/sweetalert2.min.js')}}"></script>
 
 <!-- fullCalendar 2.2.5 -->
 <script src='{{ asset('lib/main.js')}}'></script>

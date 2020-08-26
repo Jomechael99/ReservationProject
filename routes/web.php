@@ -25,3 +25,7 @@ Route::post('StudentLogin', ['uses' => 'UserController@postLogin', 'as' => 'Stud
 //Resources
 
 Route::resource('Schedule', 'ScheduleController');
+
+// Ajax Controller
+
+Route::get('viewOrganization/{id}', ['uses' => 'Ajax\RegisterAjax@viewOrganization' , 'as' => 'viewOrganization']);

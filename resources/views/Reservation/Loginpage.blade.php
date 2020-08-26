@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -33,7 +34,7 @@
             <form id="studentLogin" method="post" action="{{ route('StudentLogin') }}">
                 {{ csrf_field() }}
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="username" placeholder="Student Number">
+                    <input type="text" class="form-control" name="username" placeholder="Student Number" autocomplete="off" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -41,7 +42,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -59,9 +60,9 @@
 
             <!-- /.social-auth-links -->
 
-            <p class="text-center">
+            {{--<p class="text-center">
                 <a href="forgot-password.html">I forgot my password</a>
-            </p>
+            </p>--}}
         </div>
         <!-- /.login-card-body -->
     </div>
@@ -76,6 +77,8 @@
 <script src="{{ asset('js/adminlte.min.js')}}"></script>
 
 <script src="{{ asset('pages_javascript/registerblade.js') }}"></script>
+<script src="{{ asset('js/sweetalert2.all.min.js')}}"></script>
+<script src="{{ asset('js/sweetalert2.min.js')}}"></script>
 
 </body>
 </html>

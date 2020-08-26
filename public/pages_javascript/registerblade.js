@@ -1,6 +1,10 @@
 $(document).ready(function(){
 
 
+    $( document ).on( 'focus', ':input', function(){
+        $( this ).attr( 'autocomplete', 'off' );
+    });
+
     $('#form_submit').on('click', function(){
         registration_submit();
     });
@@ -13,7 +17,13 @@ $(document).ready(function(){
             success: function(response){
 
                 if(response.status == "success"){
-                    alert("Student Successfully Added");
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'User successfully Created',
+                        text: 'you can now login...',
+                    }).then(function(){
+                        location.reload();
+                    })
                 }else{
 
                     jQuery.each(response.errors, function(key, value){
@@ -26,5 +36,21 @@ $(document).ready(function(){
             }
         });
     }
+    $('#department').on('change' ,function(){
+
+        var id = $('#department option:selected').val();
+
+        $.ajax({
+
+            type:"GET",
+            url: '/viewOrganization/' + id,
+            success: function(data) {
+                $('#organization').empty().append("<option value=''> Choose option </option>")
+                $('#organization').append(data.option);
+            }
+        });
+
+
+    });
 
 });

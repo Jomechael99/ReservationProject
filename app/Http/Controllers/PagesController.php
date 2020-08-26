@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
@@ -17,7 +18,18 @@ class PagesController extends Controller
         if(Auth::check()){
             return view('dashboard');
         }else{
-            return view('Reservation.Loginpage');
+
+            $office = db::table('office_libraries')
+                ->get();
+
+            $department = db::table('department_libraries')
+                ->get();
+
+            $division = db::table('division_libraries')
+                ->get();
+
+            return view('Reservation.Loginpage')
+                ->with(['office' => $office , 'division' => $division , 'department' => $department]);
         }
     }
 
@@ -27,7 +39,7 @@ class PagesController extends Controller
 
     public function accountLogout(){
         Auth::logout();
-        return view('Reservation.Loginpage');
+        return redirect()->route('StudentLogin');
     }
 
 

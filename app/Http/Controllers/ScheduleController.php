@@ -39,8 +39,19 @@ class ScheduleController extends Controller
         $place_libraries = db::table('place_libraries')
             ->get();
 
+        $reservation_count = db::table('reservation_details')
+            ->get();
+
+        $cnt = 0;
+
+        if(count($reservation_count) == 0){
+            $cnt = 1;
+        }else{
+            $cnt =  count($reservation_count);
+        }
+
         return view('StudentPortal.Schedule.addschedule')
-            ->with('place', $place_libraries);
+            ->with(['place' => $place_libraries, 'cnt' => $cnt ]);
     }
 
     /**

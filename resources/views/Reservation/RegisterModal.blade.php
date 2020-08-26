@@ -47,23 +47,43 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="">Organization</label>
-                                        <input type="text" class="form-control" id="organization" name="organization" placeholder="">
+                                        <label for="">Division</label>
+                                        <select class="form-control" id="division" name="division">
+                                            <option value=""> Choose option </option>
+                                            @foreach($division as $data)
+                                                <option value="{{ $data -> id }}"> {{ $data -> division_name }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label for="">Division</label>
-                                        <input type="text" class="form-control" id="division" name="division" placeholder="">
-                                    </div>
-                                    <div class="form-group col-md-4">
                                         <label for="">Office</label>
-                                        <input type="text" class="form-control" id="office" name="office" placeholder="">
+                                        <select class="form-control" id="office" name="office">
+                                            <option value=""> Choose option </option>
+                                            @foreach($office as $data)
+                                                <option value="{{ $data -> id }}"> {{ $data -> office_name }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="">Department</label>
-                                        <input type="text" class="form-control" id="department" name="department" placeholder="">
+                                        <select class="form-control" id="department" name="department">
+                                            <option value=""> Choose option </option>
+                                            @foreach($department as $data)
+                                                <option value="{{ $data -> id }}"> {{ $data -> department_name }} </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="">Organization</label>
+                                        <select class="form-control" id="organization" name="organization">
+                                            <option value=""> Choose option </option>
+                                            {{--@foreach($organization as $data)
+                                                <option value="{{ $data -> id }}"> {{ $data -> organization_name }} </option>
+                                            @endforeach--}}
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">

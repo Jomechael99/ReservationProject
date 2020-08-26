@@ -44,20 +44,22 @@
     <img src="{{ asset('img/Homepage Images/70796666_2354739484778614_3238115637049950208_n.png') }}" width="100" height="100">
     <img src="{{ asset('img/Homepage Images/49652614_345409099627982_9019432575730450432_n.png') }}" width="100" height="100">
 </div>
-<div class="login-box">
+<div class="login-box" style="width: auto">
 
     <!-- /.login-logo -->
-    <div class="">
+    <div class="col-md-12">
         <div class="">
-            <center><h3 class="login-box-msg block-text text-center">FACILITIES MANAGEMENT FOR JOSE RIZAL UNIVERSITY</h3></center>
-        </div>
-        <div class="center">
-            <a type="button"  class="btn btn-success btn-lg btn-block">TICKETING MAINTENANCE</a>
-        </div>
-        <div class="center">
-            <a type="button" href="{{ route('StudentLogin') }}" stlye='text-color: black;'class="btn btn-success btn-lg btn-block">RESERVATION FACILITIES</a>
+            <h3 class="login-box-msg block-text text-center">FACILITIES MANAGEMENT FOR JOSE RIZAL UNIVERSITY</h3>
         </div>
         <!-- /.login-card-body -->
+    </div>
+</div>
+<div class="login-box">
+    <div class="center">
+        <a type="button"  class="btn btn-success btn-lg btn-block">TICKETING MAINTENANCE</a>
+    </div>
+    <div class="center">
+        <a type="button" href="{{ route('StudentLogin') }}" stlye='text-color: black;'class="btn btn-success btn-lg btn-block">RESERVATION FACILITIES</a>
     </div>
 </div>
 <!-- /.login-box -->

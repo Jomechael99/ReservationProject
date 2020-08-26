@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Scheduled Form</h1>
+                        <h1>Scheduled Form</h1> <span>  F-EMO-003 | Rev01({{ date("Y/m/d") }}) </span>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -129,6 +129,11 @@
 
     <script>
         $(document).ready(function(){
+
+            $( document ).on( 'focus', ':input', function(){
+                $( this ).attr( 'autocomplete', 'off' );
+            });
+
              $('#scheduledPlace').change(function(){
                  var id = $('#scheduledPlace option:selected').val();
                  if(id == "7"){
