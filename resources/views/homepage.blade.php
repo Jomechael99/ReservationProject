@@ -49,7 +49,7 @@
     <!-- /.login-logo -->
     <div class="col-md-12">
         <div class="">
-            <h3 class="login-box-msg block-text text-center">FACILITIES MANAGEMENT FOR JOSE RIZAL UNIVERSITY</h3>
+            <h3 class="login-box-msg block-text text-center">FACILITIES MANAGEMENT FOR JOSĒ RIZAL UNIVERSITY</h3>
         </div>
         <!-- /.login-card-body -->
     </div>
