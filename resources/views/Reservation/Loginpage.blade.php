@@ -24,7 +24,7 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <b>Student Login</b></a>
+        <b>Login Details</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -34,7 +34,7 @@
             <form id="studentLogin" method="post" action="{{ route('StudentLogin') }}">
                 {{ csrf_field() }}
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="username" placeholder="Student Number" autocomplete="off" required>
+                    <input type="text" class="form-control" name="username" placeholder="Username" autocomplete="off" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
