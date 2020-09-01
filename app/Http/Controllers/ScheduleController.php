@@ -77,7 +77,7 @@ class ScheduleController extends Controller
             'reservation_start'=> date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeStart")),
             'reservation_end'=>date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeEnd")),
             'facility_others'=>$others,
-            'reservation_purpose'=>$request->purpose,
+            'reservation_purpose'=>$request->Purpose,
             'reservation_date_applied'=> $request->dateApplied
         ];
 
