@@ -137,8 +137,7 @@ $(document).ready(function(){
 
         var selected_value = $('#userType option:selected').val();
         $('.changeSelect').attr("hidden", false);
-        $('#studentForm').trigger('reset');
-
+        
         if(selected_value == 1){ // Staff
             selectedStaff();
             $('#studentType,#division,#organization,#department').attr('readonly', true);
