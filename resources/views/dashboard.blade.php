@@ -60,10 +60,10 @@
                 },
                 resourceAreaHeaderContent: 'Rooms',
                 resources: [
-                        @foreach($place as $place_date)
-                    {
-                        id: '{{ $place_date -> id }}' , title : '{{ $place_date -> place_name }}'
-                    },
+                    @foreach($place as $place_date)
+                        {
+                            id: '{{ $place_date -> id }}' , title : '{{ $place_date -> place_name }}'
+                        },
                     @endforeach
                 ],
                 events: [
