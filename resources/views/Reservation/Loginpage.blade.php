@@ -75,6 +75,7 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('js/adminlte.min.js')}}"></script>
+<script src="{{ asset('pages_javascript/loginblade.js') }}"></script>
 
 <script src="{{ asset('pages_javascript/registerblade.js') }}"></script>
 <script src="{{ asset('js/sweetalert2.all.min.js')}}"></script>

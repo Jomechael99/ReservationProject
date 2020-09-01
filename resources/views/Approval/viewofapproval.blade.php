@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Scheduled Form </h1>
+                        <h1>Student Scheduled Form </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -57,21 +57,21 @@
                                         </div>
                                         <div class="form-group col-md-12" id="other_place_details" hidden>
                                             <label for="">Please specify : </label>
-                                            <input type="text" class="form-control " id="other_place" name="other_place" value="{{ $sched ->reservation_others_details }}" >
+                                            <input type="text" class="form-control " id="other_place" name="other_place" >
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="">Date of Used</label>
-                                            <input type="date" class="form-control" id="Applicants" name="useDate" value="{{ $sched -> reservation_date }}" >
+                                            <input type="date" class="form-control" id="Applicants" name="useDate" value="{{ $sched -> reservation_date }}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">Time of Start</label>
-                                            <input type="time" class="form-control" id="timeStart" name="timeStart" value="{{ date('h:i:s', strtotime($sched->reservation_start)) }}" >
+                                            <input type="time" class="form-control" id="timeStart" name="timeStart" value="{{ date('h:i:s', strtotime($sched -> reservation_start)) }}" >
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">Time of End</label>
-                                            <input type="time" class="form-control" id="timeEnd" name="timeEnd" value="{{ date('h:i:s', strtotime($sched->reservation_end)) }}">
+                                            <input type="time" class="form-control" id="timeEnd" name="timeEnd" value="{{ date('h:i:s', strtotime($sched -> reservation_end)) }}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -81,20 +81,20 @@
                                             <input type="hidden" class="form-control" id="Applicants" value="{{ Auth::user()->id }}" name="ApplicantsId"  readonly>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            <label for="">Purpose</label>
-                                            <input type="text" class="form-control" id="Purpose" name="Purpose" value="{{ $sched -> reservation_purpose }}" >
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label for="">Purpose</label>
+                                                <input type="text" class="form-control" id="Purpose" name="Purpose" value="{{ $sched -> reservation_purpose }}" >
+                                            </div>
+                                            <div class="form-group col-md-5" hidden>
+                                                <label for="">Additionals Facitilies Needed</label>
+                                                <input type="text" class="form-control" id="facilities" >
+                                            </div>
+                                            <div class="form-group col-md-1" hidden>
+                                                <label for="">&nbsp;</label>
+                                                <button type="button" class="form-control btn-info" id="additionalButton">+</button>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-5" hidden>
-                                            <label for="">Additionals Facitilies Needed</label>
-                                            <input type="text" class="form-control" id="facilities" >
-                                        </div>
-                                        <div class="form-group col-md-1" hidden>
-                                            <label for="">&nbsp;</label>
-                                            <button type="button" class="form-control btn-info" id="additionalButton">+</button>
-                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="card col-md-12">
                                             <div class="card-header">
@@ -108,11 +108,11 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody id="additionTable">
-                                                        @foreach($schedule as $other)
-                                                            <tr>
-                                                                <td> {{ $other -> reservation_others_details }}</td>
-                                                            </tr>
-                                                        @endforeach
+                                                    @foreach($schedule as $other)
+                                                        <tr>
+                                                            <td> {{ $other -> reservation_others_details }}</td>
+                                                        </tr>
+                                                    @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button class="btn btn-info" type="button" id="btnBack"> Back </button>
+                                    <button class="btn btn-success" type="button" id="btnSubmit"> Approved Schedule </button>
                                 </div>
                             </form>
                         </div>
@@ -136,12 +136,10 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
-            $('#btnBack').on('click', function(){
-                window.history.back();
-            });
-
             $('input').attr('readonly', true);
+
             $('#scheduledPlace ').attr('disabled', true);
-        })
+
+        });
     </script>
 @endsection

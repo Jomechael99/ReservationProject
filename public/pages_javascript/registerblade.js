@@ -39,16 +39,23 @@ $(document).ready(function(){
     $('#department').on('change' ,function(){
 
         var id = $('#department option:selected').val();
+        var selected_value = $('#userType option:selected').val();
+        
+        if(selected_value != 2){
+            $.ajax({
 
-        $.ajax({
+                type:"GET",
+                url: '/viewOrganization/' + id,
+                success: function(data) {
+                    $('#organization').empty().append("<option value=''> Choose option </option>")
+                    $('#organization').append(data.option);
+                }
+            });
+        }else{
 
-            type:"GET",
-            url: '/viewOrganization/' + id,
-            success: function(data) {
-                $('#organization').empty().append("<option value=''> Choose option </option>")
-                $('#organization').append(data.option);
-            }
-        });
+        }
+
+
 
 
     });

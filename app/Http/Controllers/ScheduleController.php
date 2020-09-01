@@ -77,6 +77,7 @@ class ScheduleController extends Controller
             'reservation_start'=> date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeStart")),
             'reservation_end'=>date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeEnd")),
             'facility_others'=>$others,
+            'reservation_purpose'=>$request->purpose,
             'reservation_date_applied'=> $request->dateApplied
         ];
 
@@ -137,7 +138,6 @@ class ScheduleController extends Controller
             ->leftJoin('reservation_approver_status as d', 'a.reservation_id', '=', 'd.reservation_fk_id')
             ->where('a.reservation_id', $id)
             ->get();
-
 
         return view('StudentPortal.Schedule.viewaddedschedule')
             ->with('place', $place_libraries)

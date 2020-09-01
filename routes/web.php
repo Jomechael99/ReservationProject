@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Pages Controller
 route::get('Homepage', ['uses' => 'PagesController@viewHomepage', 'as' => 'Homepage']);
 route::get('StudentLogin' ,['uses' => 'PagesController@viewStudentLogin' , 'as' => 'StudentLogin']);
 route::get('Dashboard' ,['uses' => 'PagesController@viewDashboard' , 'as' => 'Dashboard']);
@@ -21,6 +22,10 @@ Route::get('AccountLogout', ['uses' => 'PagesController@accountLogout', 'as' => 
 // User Controller
 Route::post('StudentRegister', ['uses' => 'UserController@postRegister', 'as' => 'StudentRegister']);
 Route::post('StudentLogin', ['uses' => 'UserController@postLogin', 'as' => 'StudentLogin']);
+
+// Approver Controller
+Route::get('Student-Approval-List',[ 'uses' => 'ApproverController@listofApproval', 'as' => 'ApprovalList']);
+Route::get('Student-Approval-View/{id}',[ 'uses' => 'ApproverController@viewofApproval', 'as' => 'viewApprovalList']);
 
 //Resources
 

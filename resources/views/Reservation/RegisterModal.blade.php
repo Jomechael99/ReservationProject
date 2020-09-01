@@ -30,14 +30,14 @@
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         <label for="">User Type</label>
-                                        <select class="form-control" id="studentType" name="userType">
+                                        <select class="form-control" id="userType" name="userType">
                                             <option value=""> Choose option </option>
                                             <option value="1"> Staff </option>
                                             <option value="2"> Teacher </option>
                                             <option value="3"> Student </option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-4 changeSelect">
                                         <label for="">Student Type</label>
                                         <select class="form-control" id="studentType" name="studentType">
                                             <option value=""> Choose option </option>
@@ -46,7 +46,7 @@
                                             <option value="3"> College </option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-4 changeSelect">
                                         <label for="">Division</label>
                                         <select class="form-control" id="division" name="division">
                                             <option value=""> Choose option </option>
@@ -57,7 +57,7 @@
                                     </div>
 
                                 </div>
-                                <div class="row">
+                                <div class="row changeSelect">
                                     <div class="form-group col-md-4">
                                         <label for="">Office</label>
                                         <select class="form-control" id="office" name="office">

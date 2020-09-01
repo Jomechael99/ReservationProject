@@ -16,7 +16,7 @@ class PagesController extends Controller
 
     public function viewStudentLogin(){
         if(Auth::check()){
-            return view('dashboard');
+            return redirect()->route('Dashboard');
         }else{
 
             $office = db::table('office_libraries')
@@ -34,7 +34,18 @@ class PagesController extends Controller
     }
 
     public function viewDashboard(){
-        return view('dashboard');
+
+        $place_libraries = db::table('place_libraries')
+            ->get();
+
+        if(Auth::user() -> approver == 1){
+            return view('approver_dashboard')
+                ->with('place', $place_libraries);
+        }else{
+            return view('dashboard')
+                ->with('place', $place_libraries);
+        }
+
     }
 
     public function accountLogout(){
