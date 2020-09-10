@@ -16,13 +16,17 @@ class ApproverController extends Controller
             $approver_division = Auth::user() -> division;
             $apporver_department = Auth::user() -> department;
 
+
+
             if($approver_division == ""){
                 $data_list = db::table('reservation_details as res')
                     ->join('users', 'res.user_id', '=' ,'users.id')
                     ->join('reservation_emo_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
-                    ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
+                    ->rightJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
                     ->where('users.department', $apporver_department)
                     ->get();
+
+               ;
             }else{
                 $data_list = db::table('reservation_details as res')
                     ->join('users', 'res.user_id', '=' ,'users.id')
@@ -31,7 +35,6 @@ class ApproverController extends Controller
                     ->where('users.division', $approver_division)
                     ->get();
             }
-
 
 
             return view('Approval.listofapproval')
