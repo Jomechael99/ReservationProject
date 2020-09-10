@@ -119,8 +119,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-success" type="button" id="btnSubmit"> Approved Schedule </button>
+                                <div class="card-footer text-center">
+                                    <button class="btn btn-info btn-sm  col-md-4" type="button" id="btnSubmit"> Approved/Disapprove Schedule </button>
                                 </div>
                             </form>
                         </div>
@@ -131,15 +131,99 @@
         </section>
         <!-- /.content -->
     </div>
+    {{-- Footer --}}
 @endsection
 
 @section('scripts')
     <script>
         $(document).ready(function(){
+
             $('input').attr('readonly', true);
 
             $('#scheduledPlace ').attr('disabled', true);
 
+            $('#btnSubmit').on('click', function(){
+                Swal.fire({
+                    title: 'What do you want to do ?',
+                    text: "You won't be able to revert this!",
+                    icon: 'Success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Approved!',
+                    cancelButtonText: 'No, Disapproved'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            type:"POST",
+                            url: '{{ route('ScheduleApproving') }}',
+                            data: {
+                                '_token': $('input[name=_token]').val(),
+                                'id' : {{ $id }},
+                                'approve_status' : '1'
+                            }, // get all form field value in serialize form
+                            success: function(response){
+
+                                /*if(response.status == "success"){
+                                     swal.fire("Schedule Successfully Added","","success").then(function(){
+                                         window.history.back();
+                                     });
+
+                                }else{
+                                    alert("Schedule Not Added");
+                                }*/
+
+                                swal.fire("Sorry this function currently not working");
+
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            title: 'Submit your reason here',
+                            input: 'text',
+                            inputAttributes: {
+                                autocapitalize: 'off'
+                            },
+                            preConfirm: (login) => {
+                                var reason = (`${login}`);
+                                alert(reason);
+                                $.ajax({
+                                    type:"POST",
+                                    url: '{{ route('Schedule.store') }}',
+                                    data: {
+                                        'id' : {{ $id }},
+                                        'approve_status' : '2',
+                                        'reason' : reason
+                                    }, // get all form field value in serialize form
+                                    success: function(response){
+
+                                        swal.fire("Sorry this function currently not working");
+
+                                        /*if(response.status == "success"){
+                                            /!* swal.fire("Schedule Successfully Added","","success").then(function(){
+                                                 window.history.back();
+                                             });*!/
+
+                                        }else{
+                                            alert("Schedule Not Added");
+                                        }*/
+
+                                    }
+                                });
+                            },
+                        }).then((result) =>{
+                            /*Swal.fire({
+                                title: `${result.value.login}'s avatar`,
+                                imageUrl: result.value.avatar_url
+                            })*/
+                            swal.fire("Sorry this function currently not working");
+                        });
+                    }
+                })
+            });
+
         });
+
     </script>
 @endsection

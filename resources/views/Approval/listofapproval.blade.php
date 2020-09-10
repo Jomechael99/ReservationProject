@@ -59,7 +59,12 @@
                                                         Disapproved
                                                     @endif
                                                 </td>
-                                                <td> <a href="{{ route('viewApprovalList', $data->reservation_id) }}" class="btn btn-primary">View Schedule</a></td>
+                                                <td>
+                                                    <div class="btn-group-vertical">
+                                                        <a href="{{ route('viewApprovalList', $data->reservation_id) }}" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp;View Schedule</a>
+                                                        <a href="{{ route('getFile' , $data->name ) }}" class="btn btn-success"><i class="fas fa-download"></i>&nbsp;Download Document </a>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endforeach

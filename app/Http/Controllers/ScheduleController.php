@@ -84,6 +84,31 @@ class ScheduleController extends Controller
         $id = db::table('reservation_details')
             ->insertGetId($reservation_details_data);
 
+
+        if($request->hasFile('fileDocument')) {
+
+            $allowedfileExtension=['pdf','jpg','png','docx'];
+
+            $files = $request->file('fileDocument');
+
+
+
+            $filename =  'file-'.time().'.'.$files->getClientOriginalExtension();;
+            $extension = $files->getClientOriginalExtension();
+
+            $check=in_array($extension,$allowedfileExtension);
+
+            $path = $files->storeAs('files', $filename);
+
+            $file_data = [
+                'name' => $filename,
+                'reservation_fk_id' => $id
+            ];
+
+            $file_insert = db::table('reservation_details_file')
+                ->insert($file_data);
+        }
+
         if( $request -> additional == ""){
 
             $res_details_others = true;
@@ -107,6 +132,11 @@ class ScheduleController extends Controller
             ]);
 
         $res_approver = db::table('reservation_approver_status')
+            ->insert([
+                'reservation_fk_id' => $id
+            ]);
+
+        $res_approver_reason = db::table('reservation_approver_status_reason')
             ->insert([
                 'reservation_fk_id' => $id
             ]);

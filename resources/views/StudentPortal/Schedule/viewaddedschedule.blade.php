@@ -82,15 +82,26 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group col-md-6">
                                             <label for="">Purpose</label>
-                                            <input type="text" class="form-control" id="Purpose" name="Purpose" value="{{ $sched -> reservation_purpose }}" >
+                                            <input type="text" class="form-control" id="Purpose" name="Purpose" value="{{ $sched-> reservation_purpose }}">
                                         </div>
-                                        <div class="form-group col-md-5" hidden>
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputFile">File input</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="form-control" name="fileDocument" multiple />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-5">
                                             <label for="">Additionals Facitilies Needed</label>
                                             <input type="text" class="form-control" id="facilities" >
                                         </div>
-                                        <div class="form-group col-md-1" hidden>
+                                        <div class="form-group col-md-1">
                                             <label for="">&nbsp;</label>
                                             <button type="button" class="form-control btn-info" id="additionalButton">+</button>
                                         </div>

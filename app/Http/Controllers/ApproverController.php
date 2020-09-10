@@ -20,15 +20,18 @@ class ApproverController extends Controller
                 $data_list = db::table('reservation_details as res')
                     ->join('users', 'res.user_id', '=' ,'users.id')
                     ->join('reservation_emo_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
+                    ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
                     ->where('users.department', $apporver_department)
                     ->get();
             }else{
                 $data_list = db::table('reservation_details as res')
                     ->join('users', 'res.user_id', '=' ,'users.id')
                     ->join('reservation_emo_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
+                    ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
                     ->where('users.division', $approver_division)
                     ->get();
             }
+
 
 
             return view('Approval.listofapproval')
@@ -52,9 +55,21 @@ class ApproverController extends Controller
             ->where('a.reservation_id', $id)
             ->get();
 
+
+
         return view('Approval.viewofapproval')
+            ->with('id', $id)
             ->with('place', $place_libraries)
             ->with('schedule', $schedule_data);
+    }
+
+    public function getDocument($id){
+        return response()->download(storage_path("app/files/{$id}"));
+    }
+
+
+    public function schedule_approving(Request $request){
+
     }
 
 }

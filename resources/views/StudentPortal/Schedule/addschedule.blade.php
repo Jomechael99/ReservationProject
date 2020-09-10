@@ -26,7 +26,7 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-primary">
-                            <form id="scheduledForm">
+                            <form id="scheduledForm"  enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="card-body">
                                     <div class="row">
@@ -57,15 +57,15 @@
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="">Date of Used</label>
-                                            <input type="date" class="form-control" id="Applicants" name="useDate" >
+                                            <input type="date" class="form-control" id="useDate" name="useDate" >
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">Time of Start</label>
-                                            <input type="time" class="form-control" id="timeStart" name="timeStart" >
+                                            <input type="time" class="form-control" id="timeStart" name="timeStart" min="9:00" max="21:00" >
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">Time of End</label>
-                                            <input type="time" class="form-control" id="timeEnd" name="timeEnd" >
+                                            <input type="time" class="form-control" id="timeEnd" name="timeEnd" min="9:00" max="21:00" >
                                         </div>
                                     </div>
                                     <div class="row">
@@ -80,6 +80,17 @@
                                             <label for="">Purpose</label>
                                             <input type="text" class="form-control" id="Purpose" name="Purpose" >
                                         </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputFile">File input</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="form-control" name="fileDocument" multiple />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
                                         <div class="form-group col-md-5">
                                             <label for="">Additionals Facitilies Needed</label>
                                             <input type="text" class="form-control" id="facilities" >
@@ -112,7 +123,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button class="btn btn-success" type="button" id="btnSubmit"> Add Schedule </button>
+                                    <button class="btn btn-success" type="submit" id="btnSubmit"> Add Schedule </button>
                                 </div>
                             </form>
                         </div>
@@ -170,26 +181,56 @@
             })
 
             function add_schedule_form(){
+
+
+            }
+
+           $('#scheduledForm').submit(function(e){
+
+
+                e.preventDefault();
+                var formData = new FormData(this);
                 $.ajax({
                     type:"POST",
                     url: '{{ route('Schedule.store') }}',
-                    data: $('#scheduledForm').serialize(), // get all form field value in serialize form
+                    data: formData, // get all form field value in serialize form
+                    cache:false,
+                    contentType: false,
+                    processData: false,
                     success: function(response){
 
                         if(response.status == "success"){
-                            alert("Schedule Successfully Added");
-                            window.history.back();
+                            swal.fire("Schedule Successfully Added","","success").then(function(){
+                                window.history.back();
+                            });
+
                         }else{
                             alert("Schedule Not Added");
                         }
 
                     }
                 });
-            }
-
-            $('#btnSubmit').on('click', function(){
-                add_schedule_form();
+                return false;
             });
+
+            dateValidation();
+
+
+           function dateValidation(){
+               var dtToday = new Date();
+
+               var month = dtToday.getMonth() + 1;
+               var day = dtToday.getDate() + 3 ;
+               var year = dtToday.getFullYear();
+               if(month < 10)
+                   month = '0' + month.toString();
+               if(day < 10)
+                   day = '0' + (day).toString();
+
+               var maxDate = year + '-' + month + '-' + day;
+
+               $('#useDate').attr('min', maxDate);
+           }
 
         });
 

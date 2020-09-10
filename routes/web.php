@@ -26,6 +26,8 @@ Route::post('StudentLogin', ['uses' => 'UserController@postLogin', 'as' => 'Stud
 // Approver Controller
 Route::get('Student-Approval-List',[ 'uses' => 'ApproverController@listofApproval', 'as' => 'ApprovalList']);
 Route::get('Student-Approval-View/{id}',[ 'uses' => 'ApproverController@viewofApproval', 'as' => 'viewApprovalList']);
+Route::get('Student-Document/{id}', ['uses' => 'ApproverController@getDocument', 'as' => 'getFile']);
+Route::post('Student-Schedule-Approving', ['uses' => 'ApproverController@schedule_approving', 'as'=>'ScheduleApproving']);
 
 //Resources
 
