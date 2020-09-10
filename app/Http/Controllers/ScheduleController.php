@@ -20,6 +20,7 @@ class ScheduleController extends Controller
 
         $schedule_data = db::table('reservation_details as a')
             ->join('reservation_emo_status as b', 'a.reservation_id', '=', 'b.reservation_fk_id')
+            ->where('a.user_id', Auth::user()->id)
             ->get();
 
         return view('StudentPortal.Schedule.viewschedule')
