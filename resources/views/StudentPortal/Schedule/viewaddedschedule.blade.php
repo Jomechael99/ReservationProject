@@ -66,11 +66,11 @@
                                             <input type="date" class="form-control" id="Applicants" name="useDate" value="{{ $sched -> reservation_date }}" >
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="">Time of Start</label>
+                                            <label for="">Start</label>
                                             <input type="time" class="form-control" id="timeStart" name="timeStart" value="{{ date('h:i:s', strtotime($sched->reservation_start)) }}" >
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="">Time of End</label>
+                                            <label for="">End</label>
                                             <input type="time" class="form-control" id="timeEnd" name="timeEnd" value="{{ date('h:i:s', strtotime($sched->reservation_end)) }}">
                                         </div>
                                     </div>

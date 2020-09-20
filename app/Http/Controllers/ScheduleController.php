@@ -20,6 +20,7 @@ class ScheduleController extends Controller
 
         $schedule_data = db::table('reservation_details as a')
             ->join('reservation_emo_status as b', 'a.reservation_id', '=', 'b.reservation_fk_id')
+            ->join('reservation_approver_status as c', 'a.reservation_id', '=', 'c.reservation_fk_id')
             ->where('a.user_id', Auth::user()->id)
             ->get();
 
@@ -134,13 +135,10 @@ class ScheduleController extends Controller
 
         $res_approver = db::table('reservation_approver_status')
             ->insert([
-                'reservation_fk_id' => $id
+                'reservation_fk_id' => $id,
+                'reservation_status' => 2
             ]);
 
-        $res_approver_reason = db::table('reservation_approver_status_reason')
-            ->insert([
-                'reservation_fk_id' => $id
-            ]);
 
         if($res_details_others == true && $res_emo_status == true && $res_approver == true){
             return response()->json(['status' => "success"]);

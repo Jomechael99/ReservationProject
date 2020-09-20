@@ -52,11 +52,11 @@
                                                 <td>{{ date('Y-m-d h:i A', strtotime($data->reservation_end)) }}</td>
                                                 <td>
                                                     @if($data -> reservation_status == 0)
-                                                        Pending
+                                                        Disapproved
                                                     @elseif($data -> reservation_status == 1)
                                                         Approved
                                                     @else
-                                                        Disapproved
+                                                        Pending
                                                     @endif
                                                 </td>
                                                 <td>

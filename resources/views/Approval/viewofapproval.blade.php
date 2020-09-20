@@ -66,11 +66,11 @@
                                             <input type="date" class="form-control" id="Applicants" name="useDate" value="{{ $sched -> reservation_date }}">
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="">Time of Start</label>
+                                            <label for="">Start</label>
                                             <input type="time" class="form-control" id="timeStart" name="timeStart" value="{{ date('h:i:s', strtotime($sched -> reservation_start)) }}" >
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="">Time of End</label>
+                                            <label for="">End</label>
                                             <input type="time" class="form-control" id="timeEnd" name="timeEnd" value="{{ date('h:i:s', strtotime($sched -> reservation_end)) }}">
                                         </div>
                                     </div>
@@ -119,9 +119,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer text-center">
-                                    <button class="btn btn-info btn-sm  col-md-4" type="button" id="btnSubmit"> Approved/Disapprove Schedule </button>
-                                </div>
+                                @if($sched -> reservation_status == 2)
+                                    <div class="card-footer text-center">
+                                        <button class="btn btn-info btn-sm  col-md-4" type="button" id="btnSubmit"> Approved/Disapprove Schedule </button>
+                                    </div>
+                                @endif
                             </form>
                         </div>
                     </div>
@@ -165,16 +167,16 @@
                             }, // get all form field value in serialize form
                             success: function(response){
 
-                                /*if(response.status == "success"){
-                                     swal.fire("Schedule Successfully Added","","success").then(function(){
-                                         window.history.back();
-                                     });
+                                if(response.status == "success"){
+                                    swal.fire("Approving of scheduled is Success","","success").then(function(){
+                                        location.reload();
+                                    });
 
                                 }else{
-                                    alert("Schedule Not Added");
-                                }*/
+                                    swal.fire("Something is error please contact developer", "","error");
+                                }
 
-                                swal.fire("Sorry this function currently not working");
+                                /*swal.fire("Sorry this function currently not working");*/
 
                             }
                         });
@@ -187,37 +189,31 @@
                             },
                             preConfirm: (login) => {
                                 var reason = (`${login}`);
-                                alert(reason);
                                 $.ajax({
                                     type:"POST",
-                                    url: '{{ route('Schedule.store') }}',
+                                    url: '{{ route('ScheduleApproving') }}',
                                     data: {
+                                        '_token': $('input[name=_token]').val(),
                                         'id' : {{ $id }},
-                                        'approve_status' : '2',
+                                        'approve_status' : '0',
                                         'reason' : reason
                                     }, // get all form field value in serialize form
                                     success: function(response){
 
-                                        swal.fire("Sorry this function currently not working");
+                                        /*swal.fire("Sorry this function currently not working");*/
 
-                                        /*if(response.status == "success"){
-                                            /!* swal.fire("Schedule Successfully Added","","success").then(function(){
-                                                 window.history.back();
-                                             });*!/
+                                        if(response.status == "success"){
+                                             swal.fire("Disapproved of scheduled is Success","","success").then(function(){
+                                                 location.reload();
+                                             });
 
                                         }else{
-                                            alert("Schedule Not Added");
-                                        }*/
+                                            swal.fire("Something is error please contact developer", "","error");
+                                        }
 
                                     }
                                 });
                             },
-                        }).then((result) =>{
-                            /*Swal.fire({
-                                title: `${result.value.login}'s avatar`,
-                                imageUrl: result.value.avatar_url
-                            })*/
-                            swal.fire("Sorry this function currently not working");
                         });
                     }
                 })

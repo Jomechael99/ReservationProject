@@ -60,11 +60,11 @@
                                             <input type="date" class="form-control" id="useDate" name="useDate" >
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="">Time of Start</label>
+                                            <label for="">Start</label>
                                             <input type="time" class="form-control" id="timeStart" name="timeStart" min="9:00" max="21:00" >
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="">Time of End</label>
+                                            <label for="">End</label>
                                             <input type="time" class="form-control" id="timeEnd" name="timeEnd" min="9:00" max="21:00" >
                                         </div>
                                     </div>

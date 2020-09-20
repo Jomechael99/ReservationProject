@@ -21,7 +21,7 @@ class ApproverController extends Controller
             if($approver_division == ""){
                 $data_list = db::table('reservation_details as res')
                     ->join('users', 'res.user_id', '=' ,'users.id')
-                    ->join('reservation_emo_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
+                    ->leftjoin('reservation_approver_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
                     ->rightJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
                     ->where('users.department', $apporver_department)
                     ->get();
@@ -30,11 +30,12 @@ class ApproverController extends Controller
             }else{
                 $data_list = db::table('reservation_details as res')
                     ->join('users', 'res.user_id', '=' ,'users.id')
-                    ->join('reservation_emo_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
+                    ->leftjoin('reservation_approver_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
                     ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
                     ->where('users.division', $approver_division)
                     ->get();
             }
+
 
 
             return view('Approval.listofapproval')
@@ -58,8 +59,6 @@ class ApproverController extends Controller
             ->where('a.reservation_id', $id)
             ->get();
 
-
-
         return view('Approval.viewofapproval')
             ->with('id', $id)
             ->with('place', $place_libraries)
@@ -72,6 +71,27 @@ class ApproverController extends Controller
 
 
     public function schedule_approving(Request $request){
+
+        if($request->approve_status == 1){
+            $schedule_approved_data = [
+                'reservation_status' => 1,
+            ];
+        }else{
+            $schedule_approved_data = [
+                'reservation_status' => 0,
+                'reservation_reason' => $request->reason
+            ];
+        }
+
+        $approved = db::table('reservation_approver_status')
+            ->where('reservation_fk_id', $request->id)
+            ->update($schedule_approved_data);
+
+        if($approved == true){
+            return response()->json(array('status' => "success"));
+        }else{
+            return response()->json(array('status' => "failed"));
+        }
 
     }
 
