@@ -25,5 +25,28 @@ class RegisterAjax extends Controller
 
     }
 
+    public function viewDivision($id){
+
+
+        $option = "";
+
+        if($id == 0){
+            $division = db::table('division_libraries')
+                ->get();
+        }else{
+            $division = db::table('division_libraries')
+                ->where('division_type', $id)
+                ->get();
+        }
+
+
+
+        foreach($division as $data){
+            $option .= '<option value="'.$data -> id.'"> '.$data -> division_name .' </option>';
+        }
+
+        return response()->json( array('option' => $option));
+    }
+
 }
 

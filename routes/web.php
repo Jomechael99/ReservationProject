@@ -36,3 +36,4 @@ Route::resource('Schedule', 'ScheduleController');
 // Ajax Controller
 
 Route::get('viewOrganization/{id}', ['uses' => 'Ajax\RegisterAjax@viewOrganization' , 'as' => 'viewOrganization']);
+Route::get('viewDivision/{id}', ['uses' => 'Ajax\RegisterAjax@viewDivision' , 'as' => 'viewDivision']);

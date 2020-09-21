@@ -9,6 +9,8 @@ $(document).ready(function(){
         registration_submit();
     });
 
+
+
     function registration_submit(){
         $.ajax({
             type:"POST",
@@ -40,7 +42,7 @@ $(document).ready(function(){
 
         var id = $('#department option:selected').val();
         var selected_value = $('#userType option:selected').val();
-        
+
         if(selected_value != 2){
             $.ajax({
 
@@ -55,9 +57,91 @@ $(document).ready(function(){
 
         }
 
+    });
 
+    $('#department').on('change' ,function(){
 
+        var id = $('#department option:selected').val();
+        var selected_value = $('#userType option:selected').val();
+
+        if(selected_value != 2){
+            $.ajax({
+
+                type:"GET",
+                url: '/viewOrganization/' + id,
+                success: function(data) {
+                    $('#organization').empty().append("<option value=''> Choose option </option>")
+                    $('#organization').append(data.option);
+                }
+            });
+        }else{
+
+        }
 
     });
+
+
+
+
+
+    $('#userType').on('change', function(){
+
+        var id = $('#userType option:selected').val();
+
+        if(id == 2 ){
+
+
+            $.ajax({
+
+                type:"GET",
+                url: '/viewDivision/' + 0,
+                success: function(data) {
+                    $('#division').empty().append("<option value=''> Choose option </option>")
+                    $('#division').append(data.option);
+                }
+
+            });
+
+        }else{
+
+            $('#studentType').on('change' ,function(){
+
+                var id2 = $('#studentType option:selected').val();
+
+                $("#department > option").each(function() {
+                    $('#department,#organization').attr('readonly', false);
+                    if(id2 == 3){
+                        if($(this).val() == ""){
+
+                        }else{
+                            $(this).attr('disabled', false);
+                        }
+                    }else{
+                        $('#department,#organization').attr('readonly', true);
+                        if($(this).val() == ""){
+
+                        }else{
+                            $(this).attr('disabled', true);
+                        }
+                    }
+
+                });
+
+                $.ajax({
+
+                    type:"GET",
+                    url: '/viewDivision/' + id2,
+                    success: function(data) {
+                        $('#division').empty().append("<option value=''> Choose option </option>")
+                        $('#division').append(data.option);
+                    }
+
+                });
+
+            });
+        }
+
+
+    })
 
 });

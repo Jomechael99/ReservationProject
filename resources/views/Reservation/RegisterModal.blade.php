@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="form-group col-md-4 changeSelect">
                                         <label for="">Student Type</label>
-                                        <select class="form-control" id="studentType" name="studentType">
+                                        <select class="form-control staffSelect teacherSelect" id="studentType" name="studentType">
                                             <option value=""> Choose option </option>
                                             <option value="1"> Elementary </option>
                                             <option value="2"> Highschool </option>
@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="form-group col-md-4 changeSelect">
                                         <label for="">Division</label>
-                                        <select class="form-control" id="division" name="division">
+                                        <select class="form-control staffSelect" id="division" name="division">
                                             <option value=""> Choose option </option>
                                             @foreach($division as $data)
                                                 <option value="{{ $data -> id }}"> {{ $data -> division_name }} </option>
@@ -60,7 +60,7 @@
                                 <div class="row changeSelect">
                                     <div class="form-group col-md-4">
                                         <label for="">Office</label>
-                                        <select class="form-control" id="office" name="office">
+                                        <select class="form-control teacherSelect studentSelect" id="office" name="office">
                                             <option value=""> Choose option </option>
                                             @foreach($office as $data)
                                                 <option value="{{ $data -> id }}"> {{ $data -> office_name }} </option>
@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="">Department</label>
-                                        <select class="form-control" id="department" name="department">
+                                        <select class="form-control staffSelect" id="department" name="department">
                                             <option value=""> Choose option </option>
                                             @foreach($department as $data)
                                                 <option value="{{ $data -> id }}"> {{ $data -> department_name }} </option>
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="">Organization</label>
-                                        <select class="form-control" id="organization" name="organization">
+                                        <select class="form-control staffSelect teacherSelect" id="organization" name="organization">
                                             <option value=""> Choose option </option>
                                             {{--@foreach($organization as $data)
                                                 <option value="{{ $data -> id }}"> {{ $data -> organization_name }} </option>
