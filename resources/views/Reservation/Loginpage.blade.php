@@ -51,9 +51,12 @@
                 </div>
                 <div class="social-auth-links text-center mb-3">
                     <button type="submit" id="SigninButton" class="btn btn-primary btn-block">Sign In</button>
-                    <button type="button" id="RegisterButton" class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal">
+                    {{--<button type="button" id="RegisterButton" class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal">
                         Register
-                    </button>
+                    </button>--}}
+                    <a href="{{ route('redirect') }}" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                    </a>
 
                 </div>
             </form>

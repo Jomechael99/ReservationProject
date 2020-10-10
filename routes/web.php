@@ -20,7 +20,7 @@ route::get('Dashboard' ,['uses' => 'PagesController@viewDashboard' , 'as' => 'Da
 Route::get('AccountLogout', ['uses' => 'PagesController@accountLogout', 'as' => 'AccountLogout']);
 
 // User Controller
-Route::post('StudentRegister', ['uses' => 'UserController@postRegister', 'as' => 'StudentRegister']);
+// Route::post('StudentRegister', ['uses' => 'UserController@postRegister', 'as' => 'StudentRegister']);
 Route::post('StudentLogin', ['uses' => 'UserController@postLogin', 'as' => 'StudentLogin']);
 
 // Approver Controller
@@ -37,3 +37,11 @@ Route::resource('Schedule', 'ScheduleController');
 
 Route::get('viewOrganization/{id}', ['uses' => 'Ajax\RegisterAjax@viewOrganization' , 'as' => 'viewOrganization']);
 Route::get('viewDivision/{id}', ['uses' => 'Ajax\RegisterAjax@viewDivision' , 'as' => 'viewDivision']);
+
+
+// Google Account
+
+
+
+Route::get('google', [ 'uses' => 'GoogleController@redirectToGoogle' , 'as' => 'redirect']);
+Route::get('auth/google/callback', ['uses' => 'GoogleController@handleGoogleCallback' , 'as' => 'callback']);

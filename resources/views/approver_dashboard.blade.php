@@ -40,17 +40,11 @@
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
-                now: '2020-06-07',
+                now: '{{ date('Y-m-d') }}',
                 scrollTime: '00:00', // undo default 6am scrollTime
-                editable: true, // enable draggable events
                 selectable: true,
                 aspectRatio: 1.8,
-                headerToolbar: {
-                    left: 'today prev,next',
-                    center: 'title',
-                    right: 'resourceTimelineDay,resourceTimelineThreeDays,timeGridWeek,dayGridMonth,listWeek'
-                },
-                initialView: 'resourceTimelineDay',
+                initialView: 'dayGridMonth',
                 views: {
                     resourceTimelineThreeDays: {
                         type: 'resourceTimeline',
@@ -67,11 +61,11 @@
                     @endforeach
                 ],
                 events: [
-                    /*{ id: '1', resourceId: 'b', start: '2020-06-07T02:00:00', end: '2020-06-07T07:00:00', title: 'event 1' },
+                    { id: '1', resourceId: 'b', start: '2020-06-07T02:00:00', end: '2020-06-07T07:00:00', title: 'event 1' },
                     { id: '2', resourceId: 'c', start: '2020-06-07T05:00:00', end: '2020-06-07T22:00:00', title: 'event 2' },
                     { id: '3', resourceId: 'd', start: '2020-06-06', end: '2020-06-08', title: 'event 3' },
                     { id: '4', resourceId: 'e', start: '2020-06-07T03:00:00', end: '2020-06-07T08:00:00', title: 'event 4' },
-                    { id: '5', resourceId: 'f', start: '2020-06-07T00:30:00', end: '2020-06-07T02:30:00', title: 'event 5' }*/
+                    { id: '5', resourceId: 'f', start: '2020-06-07T00:30:00', end: '2020-06-07T02:30:00', title: 'event 5' }
                 ]
             });
 
