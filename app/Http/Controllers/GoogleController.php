@@ -27,9 +27,9 @@ class GoogleController extends Controller
 
             $user = Socialite::driver('google')->user();
 
-            if(explode("@", $user->email)[1] !== 'my.jru.edu'){
+            /*if(explode("@", $user->email)[1] !== 'my.jru.edu'){
                 return redirect()->route('StudentLogin');
-            }
+            }*/
 
             $finduser = User::where('google_id', $user->id)->first();
 
