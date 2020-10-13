@@ -13,11 +13,12 @@ class GoogleController extends Controller
 {
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->stateless()->redirect();
+        /*return Socialite::driver('google')->with(["prompt" => "select_account"])->redirect();*/
+        return Socialite::driver('google')->with(["prompt" => "select_account", "hd"=>"my.jru.edu"])->redirect();
     }
 
     /**
-     * Create a new controller instance.s
+     * Create a new controller instance
      *
      * @return void
      */
@@ -27,9 +28,9 @@ class GoogleController extends Controller
 
             $user = Socialite::driver('google')->stateless()->user();
 
-            if(explode("@", $user->email)[1] !== 'my.jru.edu'){
+            /*if(explode("@", $user->email)[1] !== 'my.jru.edu'){
                 return redirect()->route('StudentLogin');
-            }
+            }*/
 
             $finduser = User::where('google_id', $user->id)->first();
 

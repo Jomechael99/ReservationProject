@@ -91,7 +91,7 @@
 
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-md-5">
+                                        <div class="form-group col-md-11">
                                             <label for="">Additionals Facitilies Needed</label>
                                             <input type="text" class="form-control" id="facilities" >
                                         </div>

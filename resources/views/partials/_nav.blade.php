@@ -27,7 +27,7 @@
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
                         <div class="info">
-                            <a href="#" class="d-block">User Login : {{ Auth::user() -> username }}</a>
+                            <a href="#" class="d-block">User: {{ Auth::user() -> lastname }}, {{ Auth::user() -> firstname }}</a>
                         </div>
                     </div>
 
