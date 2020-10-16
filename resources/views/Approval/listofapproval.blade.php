@@ -52,11 +52,11 @@
                                                 <td>{{ date('Y-m-d h:i A', strtotime($data->reservation_end)) }}</td>
                                                 <td>
                                                     @if($data -> reservation_status == 0)
-                                                        Disapproved
+                                                        <span class="float-right badge bg-error">Disapproved</span>
                                                     @elseif($data -> reservation_status == 1)
-                                                        Approved
+                                                        <span class="float-right badge bg-success">Approved</span>
                                                     @else
-                                                        Pending
+                                                        <span class="float-right badge bg-primary">Pending</span>
                                                     @endif
                                                 </td>
                                                 <td>

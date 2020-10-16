@@ -29,6 +29,12 @@ Route::get('Student-Approval-View/{id}',[ 'uses' => 'ApproverController@viewofAp
 Route::get('Student-Document/{id}', ['uses' => 'ApproverController@getDocument', 'as' => 'getFile']);
 Route::post('Student-Schedule-Approving', ['uses' => 'ApproverController@schedule_approving', 'as'=>'ScheduleApproving']);
 
+// EMO Controller
+
+route::get('EMO/Student-Approval-List', ['uses' => 'EMOController@viewSchedule', 'as' => 'viewEmoList']);
+Route::get('EMO/Student-Approval-View/{id}',[ 'uses' => 'EMOController@viewofApproval', 'as' => 'viewEmoListApproved']);
+Route::post('EMO/Student-Schedule-Approving', ['uses' => 'EMOController@schedule_approving', 'as'=>'EmoApproving']);
+
 //Resources
 
 Route::resource('Schedule', 'ScheduleController');

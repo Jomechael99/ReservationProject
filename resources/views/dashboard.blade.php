@@ -1,6 +1,7 @@
 @extends('main')
 
 @section('content')
+
     <div class="content-wrapper" style="min-height: 583px;">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -17,6 +18,45 @@
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
+        </div>
+        <div id="calendarModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3> Event Title </h3>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                    </div>
+                    <div id="modalBody" class="modal-body" style="margin: 0 auto;">
+                        <div class="row">
+                            <h5>
+                                <div class="text-center">
+                                    <span> Event : </span> &nbsp;
+                                    <span id="title"></span>
+                                </div>
+                            </h5>
+                        </div>
+                        <div class="row">
+                            <h5>
+                                <div class="text-center">
+                                    <span> Time Start : </span> &nbsp;
+                                    <span id="start"></span>
+                                </div>
+                            </h5>
+                        </div>
+                        <div class="row">
+                            <h5>
+                                <div class="text-center">
+                                    <span> Time End : </span> &nbsp;
+                                    <span id="end"></span>
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.content-header -->
 
@@ -54,19 +94,27 @@
                 },
                 resourceAreaHeaderContent: 'Rooms',
                 resources: [
-                    @foreach($place as $place_date)
-                        {
-                            id: '{{ $place_date -> id }}' , title : '{{ $place_date -> place_name }}'
-                        },
+                        @foreach($place as $place_date)
+                    {
+                        id: '{{ $place_date -> id }}' , title : '{{ $place_date -> place_name }}'
+                    },
                     @endforeach
                 ],
                 events: [
-                    { id: '1', resourceId: 'b', start: '2020-06-07T02:00:00', end: '2020-06-07T07:00:00', title: 'event 1' },
-                    { id: '2', resourceId: 'c', start: '2020-06-07T05:00:00', end: '2020-06-07T22:00:00', title: 'event 2' },
-                    { id: '3', resourceId: 'd', start: '2020-06-06', end: '2020-06-08', title: 'event 3' },
-                    { id: '4', resourceId: 'e', start: '2020-06-07T03:00:00', end: '2020-06-07T08:00:00', title: 'event 4' },
-                    { id: '5', resourceId: 'f', start: '2020-06-07T00:30:00', end: '2020-06-07T02:30:00', title: 'event 5' }
-                ]
+                    @foreach($data as $list)
+                        {  start: '{{ $list -> reservation_start }}', end: '{{ $list -> reservation_end }}', title: '{{ $list->lastname }} , {{ $list -> firstname }} - Purpose : {{ $list -> reservation_purpose }} ' },
+                    @endforeach
+                ],
+                eventClick:  function(info) {
+                    var data = info.event;
+
+                    $('#title').text(data.title);
+                    $('#start').text(moment(data.start).format('MMM Do h:mm A'));
+                    $('#end').text(moment(data.end).format('MMM Do h:mm A'));
+                    $('#calendarModal').modal();
+                },
+
+
             });
 
             calendar.render();

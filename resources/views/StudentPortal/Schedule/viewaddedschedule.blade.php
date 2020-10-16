@@ -40,7 +40,7 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Date & Time EMO Request Receive ( For Emo Use Only ) </label>
-                                            <input type="datetime-local" class="form-control" name="datetimeEMO" id="datetimeEMO" readonly>
+                                            <input type="text" class="form-control" name="datetimeEMO" id="datetimeEMO" value="{{ date('m-d-Y h:i:s A', strtotime($sched -> reservation_approved_time))}} " readonly>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -57,51 +57,49 @@
                                         </div>
                                         <div class="form-group col-md-12" id="other_place_details" hidden>
                                             <label for="">Please specify : </label>
-                                            <input type="text" class="form-control " id="other_place" name="other_place" value="{{ $sched ->reservation_others_details }}" >
+                                            <input type="text" class="form-control " id="other_place" name="other_place" >
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="">Date of Used</label>
-                                            <input type="date" class="form-control" id="Applicants" name="useDate" value="{{ $sched -> reservation_date }}" >
+                                            <input type="date" class="form-control" id="Applicants" name="useDate" value="{{ $sched -> reservation_date }}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">Start</label>
-                                            <input type="time" class="form-control" id="timeStart" name="timeStart" value="{{ date('h:i:s', strtotime($sched->reservation_start)) }}" >
+                                            <input type="time" class="form-control" id="timeStart" name="timeStart" value="{{ date('H:i', strtotime($sched -> reservation_start)) }}" >
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">End</label>
-                                            <input type="time" class="form-control" id="timeEnd" name="timeEnd" value="{{ date('h:i:s', strtotime($sched->reservation_end)) }}">
+                                            <input type="time" class="form-control" id="timeEnd" name="timeEnd" value="{{ date('H:i', strtotime($sched -> reservation_end)) }}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-12">
                                             <label for="">Applicants</label>
-                                            <input type="text" class="form-control" id="Applicants" value="{{ Auth::user()->username }}" name="Applicants"  readonly>
-                                            <input type="hidden" class="form-control" id="Applicants" value="{{ Auth::user()->id }}" name="ApplicantsId"  readonly>
+                                            <input type="text" class="form-control" id="Applicants" value="{{ $sched -> lastname }} , {{ $sched -> firstname }}" name="Applicants"  readonly>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-12">
+                                            <label for="">Division</label>
+                                            <input type="text" class="form-control" id="Applicants" value="{{ $sched -> division_name ? $sched->division_name : '' }}" name="Applicants"  readonly>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="">Department</label>
+                                            <input type="text" class="form-control" id="Applicants" value="{{  $sched -> department_name ? $sched->department_name : '' }}" name="Applicants"  readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
                                             <label for="">Purpose</label>
-                                            <input type="text" class="form-control" id="Purpose" name="Purpose" value="{{ $sched-> reservation_purpose }}">
+                                            <input type="text" class="form-control" id="Purpose" name="Purpose" value="{{ $sched -> reservation_purpose }}" >
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="exampleInputFile">File input</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="form-control" name="fileDocument" multiple />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-5">
+                                        <div class="form-group col-md-5" hidden>
                                             <label for="">Additionals Facitilies Needed</label>
                                             <input type="text" class="form-control" id="facilities" >
                                         </div>
-                                        <div class="form-group col-md-1">
+                                        <div class="form-group col-md-1" hidden>
                                             <label for="">&nbsp;</label>
                                             <button type="button" class="form-control btn-info" id="additionalButton">+</button>
                                         </div>
@@ -116,14 +114,16 @@
                                                     <thead>
                                                     <tr class="text-center">
                                                         <th>Additionals Details</th>
+                                                        <th>Additionals Quantity</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="additionTable">
-                                                        @foreach($schedule as $other)
-                                                            <tr>
-                                                                <td> {{ $other -> reservation_others_details }}</td>
-                                                            </tr>
-                                                        @endforeach
+                                                    @foreach($schedule as $other)
+                                                        <tr class="text-center">
+                                                            <td> {{ $other -> facilities_name }}</td>
+                                                            <td> {{ $other -> facilities_qty }}</td>
+                                                        </tr>
+                                                    @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>

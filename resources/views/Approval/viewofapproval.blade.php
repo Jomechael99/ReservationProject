@@ -40,7 +40,7 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Date & Time EMO Request Receive ( For Emo Use Only ) </label>
-                                            <input type="datetime-local" class="form-control" name="datetimeEMO" id="datetimeEMO" readonly>
+                                            <input type="text" class="form-control" name="datetimeEMO" id="datetimeEMO" value="{{ date('m-d-Y h:i:s A', strtotime($sched -> reservation_approved_time))}} " readonly>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -67,34 +67,43 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">Start</label>
-                                            <input type="time" class="form-control" id="timeStart" name="timeStart" value="{{ date('h:i:s', strtotime($sched -> reservation_start)) }}" >
+                                            <input type="time" class="form-control" id="timeStart" name="timeStart" value="{{ date('H:i', strtotime($sched -> reservation_start)) }}" >
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">End</label>
-                                            <input type="time" class="form-control" id="timeEnd" name="timeEnd" value="{{ date('h:i:s', strtotime($sched -> reservation_end)) }}">
+                                            <input type="time" class="form-control" id="timeEnd" name="timeEnd" value="{{ date('H:i', strtotime($sched -> reservation_end)) }}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-12">
                                             <label for="">Applicants</label>
-                                            <input type="text" class="form-control" id="Applicants" value="{{ Auth::user()->username }}" name="Applicants"  readonly>
-                                            <input type="hidden" class="form-control" id="Applicants" value="{{ Auth::user()->id }}" name="ApplicantsId"  readonly>
+                                            <input type="text" class="form-control" id="Applicants" value="{{ $sched -> lastname }} , {{ $sched -> firstname }}" name="Applicants"  readonly>
                                         </div>
                                     </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-12">
-                                                <label for="">Purpose</label>
-                                                <input type="text" class="form-control" id="Purpose" name="Purpose" value="{{ $sched -> reservation_purpose }}" >
-                                            </div>
-                                            <div class="form-group col-md-5" hidden>
-                                                <label for="">Additionals Facitilies Needed</label>
-                                                <input type="text" class="form-control" id="facilities" >
-                                            </div>
-                                            <div class="form-group col-md-1" hidden>
-                                                <label for="">&nbsp;</label>
-                                                <button type="button" class="form-control btn-info" id="additionalButton">+</button>
-                                            </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label for="">Division</label>
+                                            <input type="text" class="form-control" id="Applicants" value="{{ $sched -> division_name ? $sched->division_name : '' }}" name="Applicants"  readonly>
                                         </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="">Department</label>
+                                            <input type="text" class="form-control" id="Applicants" value="{{  $sched -> department_name ? $sched->department_name : '' }}" name="Applicants"  readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label for="">Purpose</label>
+                                            <input type="text" class="form-control" id="Purpose" name="Purpose" value="{{ $sched -> reservation_purpose }}" >
+                                        </div>
+                                        <div class="form-group col-md-5" hidden>
+                                            <label for="">Additionals Facitilies Needed</label>
+                                            <input type="text" class="form-control" id="facilities" >
+                                        </div>
+                                        <div class="form-group col-md-1" hidden>
+                                            <label for="">&nbsp;</label>
+                                            <button type="button" class="form-control btn-info" id="additionalButton">+</button>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="card col-md-12">
                                             <div class="card-header">
@@ -105,12 +114,14 @@
                                                     <thead>
                                                     <tr class="text-center">
                                                         <th>Additionals Details</th>
+                                                        <th>Additionals Quantity</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="additionTable">
                                                     @foreach($schedule as $other)
-                                                        <tr>
-                                                            <td> {{ $other -> reservation_others_details }}</td>
+                                                        <tr class="text-center">
+                                                            <td> {{ $other -> facilities_name }}</td>
+                                                            <td> {{ $other -> facilities_qty }}</td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>

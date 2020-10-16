@@ -26,4 +26,29 @@ class ScheduleController extends Controller
 
     }
 
+    public function schedule_approving(Request $request){
+
+        if($request->approve_status == 1){
+            $schedule_approved_data = [
+                'reservation_status' => 1,
+            ];
+        }else{
+            $schedule_approved_data = [
+                'reservation_status' => 0,
+                'reservation_reason' => $request->reason
+            ];
+        }
+
+        $approved = db::table('reservation_approver_status')
+            ->where('reservation_fk_id', $request->id)
+            ->update($schedule_approved_data);
+
+        if($approved == true){
+            return response()->json(array('status' => "success"));
+        }else{
+            return response()->json(array('status' => "failed"));
+        }
+
+    }
+
 }

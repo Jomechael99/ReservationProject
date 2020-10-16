@@ -6,42 +6,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class ApproverController extends Controller
+class EMOController extends Controller
 {
     //
-    public function listofApproval(){
-
-        if(Auth::user()->approver == 1){
-
-            $approver_division = Auth::user() -> division;
-            $apporver_department = Auth::user() -> department;
+    public function viewSchedule(){
+        if(Auth::user()->approver == 2){
 
 
-            if($approver_division == ""){ // Highschool Elementary
                 $data_list = db::table('reservation_details as res')
                     ->join('users', 'res.user_id', '=' ,'users.id')
                     ->leftjoin('reservation_approver_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
                     ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
-                    ->where('res.reservation_department', $apporver_department)
+                    ->leftjoin('reservation_emo_status as emo', 'res.reservation_id', '=', 'emo.reservation_fk_id')
+                    ->where('res_status.reservation_status', 1)
                     ->get();
-            }else{ // College
-                $data_list = db::table('reservation_details as res')
-                    ->join('users', 'res.user_id', '=' ,'users.id')
-                    ->leftjoin('reservation_approver_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
-                    ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
-                    ->where('res.reservation_division', $approver_division)
-                    ->get();
-            }
 
 
-
-            return view('Approval.listofapproval')
+            return view('EMO.listofschedule')
                 ->with('data', $data_list);
 
         }else{
             return redirect()->route('StudentLogin');
         }
-
     }
 
     function viewofApproval($id){
@@ -66,25 +52,24 @@ class ApproverController extends Controller
             ->with('schedule', $schedule_data);
     }
 
-    public function getDocument($id){
-        return response()->download(storage_path("app/files/{$id}"));
-    }
-
-
     public function schedule_approving(Request $request){
 
         if($request->approve_status == 1){
             $schedule_approved_data = [
-                'reservation_status' => 1,
+                'reservation_emo_status' => 1,
+                'reservation_received_by' => $request->receivedby,
+                'reservation_approved_time' => date("Y-m-d H:i:s")
             ];
         }else{
             $schedule_approved_data = [
-                'reservation_status' => 0,
-                'reservation_reason' => $request->reason
+                'reservation_emo_status' => 0,
+                'reservation_received_by' => $request->receivedby,
+                'reservation_approved_time' => date("Y-m-d H:i:s")
             ];
         }
 
-        $approved = db::table('reservation_approver_status')
+
+        $approved = db::table('reservation_emo_status')
             ->where('reservation_fk_id', $request->id)
             ->update($schedule_approved_data);
 
@@ -95,5 +80,4 @@ class ApproverController extends Controller
         }
 
     }
-
 }

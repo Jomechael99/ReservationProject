@@ -145,7 +145,7 @@ class ScheduleController extends Controller
             ->insert([
                 'reservation_fk_id' => $id,
                 'reservation_received_by' => "",
-                'reservation_status' => 0,
+                'reservation_emo_status' => 0,
             ]);
 
         $res_approver = db::table('reservation_approver_status')
@@ -176,10 +176,14 @@ class ScheduleController extends Controller
         $place_libraries = db::table('place_libraries')
             ->get();
 
-        $schedule_data = db::table('reservation_details as a')
+        $schedule_data = \Illuminate\Support\Facades\DB::table('reservation_details as a')
             ->leftJoin('reservation_details_others as b', 'a.reservation_id', '=', 'b.reservation_fk_id')
             ->leftJoin('reservation_emo_status as c', 'a.reservation_id', '=', 'c.reservation_fk_id')
             ->leftJoin('reservation_approver_status as d', 'a.reservation_id', '=', 'd.reservation_fk_id')
+            ->leftJoin('facilities_libraries as e', 'b.reservation_others_details', '=', 'e.id')
+            ->join('users as f', 'a.user_id', '=', 'f.id')
+            ->leftJoin('division_libraries as g', 'g.id' ,'=', 'a.reservation_division')
+            ->leftJoin('department_libraries as h', 'h.id' ,'=', 'a.reservation_department')
             ->where('a.reservation_id', $id)
             ->get();
 
