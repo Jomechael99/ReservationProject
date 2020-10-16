@@ -18,6 +18,9 @@ class ScheduleController extends Controller
     {
         //
 
+
+
+
         $schedule_data = db::table('reservation_details as a')
             ->join('reservation_emo_status as b', 'a.reservation_id', '=', 'b.reservation_fk_id')
             ->join('reservation_approver_status as c', 'a.reservation_id', '=', 'c.reservation_fk_id')
@@ -25,6 +28,7 @@ class ScheduleController extends Controller
             ->get();
 
         return view('StudentPortal.Schedule.viewschedule')
+
             ->with('data', $schedule_data);
     }
 
@@ -44,6 +48,9 @@ class ScheduleController extends Controller
         $reservation_count = db::table('reservation_details')
             ->get();
 
+        $additional_facilities = db::table('facilities_libraries')
+            ->get();
+
         $cnt = 0;
 
         if(count($reservation_count) == 0){
@@ -52,8 +59,13 @@ class ScheduleController extends Controller
             $cnt =  count($reservation_count);
         }
 
+        $division = db::table('division_libraries')
+            ->OrderBy('division_type')
+            ->OrderBy('division_name')
+            ->get();
+
         return view('StudentPortal.Schedule.addschedule')
-            ->with(['place' => $place_libraries, 'cnt' => $cnt ]);
+            ->with(['place' => $place_libraries, 'cnt' => $cnt , 'division' => $division , 'facilities' => $additional_facilities]);
     }
 
     /**
@@ -80,7 +92,9 @@ class ScheduleController extends Controller
             'reservation_end'=>date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeEnd")),
             'facility_others'=>$others,
             'reservation_purpose'=>$request->Purpose,
-            'reservation_date_applied'=> $request->dateApplied
+            'reservation_date_applied'=> $request->dateApplied,
+            'reservation_division' => $request->Division,
+            'reservation_department' => $request->Department
         ];
 
         $id = db::table('reservation_details')
@@ -120,6 +134,7 @@ class ScheduleController extends Controller
                 $res_details_others = db::table('reservation_details_others')
                     ->insert([
                        'reservation_others_details' => $request->additional[$i],
+                        'facilities_qty' => $request->qty[$i],
                         'reservation_fk_id' => $id
                     ]);
             }

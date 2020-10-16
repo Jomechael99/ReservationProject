@@ -33,10 +33,15 @@ Route::post('Student-Schedule-Approving', ['uses' => 'ApproverController@schedul
 
 Route::resource('Schedule', 'ScheduleController');
 
-// Ajax Controller
+// Ajax Controller Register Ajax
 
 Route::get('viewOrganization/{id}', ['uses' => 'Ajax\RegisterAjax@viewOrganization' , 'as' => 'viewOrganization']);
 Route::get('viewDivision/{id}', ['uses' => 'Ajax\RegisterAjax@viewDivision' , 'as' => 'viewDivision']);
+
+// Ajax Controller Schedule Ajax
+
+Route::get('viewDepartment/{id}', ['uses' => 'Ajax\ScheduleController@viewDepartment', 'as' => 'viewDepartment']);
+
 
 
 // Google Account

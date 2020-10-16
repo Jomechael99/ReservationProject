@@ -61,18 +61,35 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">Start</label>
-                                            <input type="time" class="form-control" id="timeStart" name="timeStart" min="9:00" max="21:00" >
+                                            <input type="time" class="form-control" id="timeStart" name="timeStart" min="09:00" max="21:00" >
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">End</label>
-                                            <input type="time" class="form-control" id="timeEnd" name="timeEnd" min="9:00" max="21:00" >
+                                            <input type="time" class="form-control" id="timeEnd" name="timeEnd" min="09:00" max="21:00" >
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-12">
                                             <label for="">Applicants</label>
-                                            <input type="text" class="form-control" id="Applicants" value="{{ Auth::user()->username }}" name="Applicants"  readonly>
+                                            <input type="text" class="form-control" id="Applicants" value="{{ Auth::user()->lastname }}, {{ Auth::user()->firstname }}" name="Applicants"  readonly>
                                             <input type="hidden" class="form-control" id="Applicants" value="{{ Auth::user()->id }}" name="ApplicantsId"  readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="">Division</label>
+                                            <select class="form-control" id="Division" name="Division" >
+                                                <option value=""> Choose Option</option>
+                                                @foreach($division as $row)
+                                                    <option value="{{ $row -> id }}" division_type="{{ $row -> division_type }}"> {{ $row -> division_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Department</label>
+                                            <select class="form-control" id="Department" name="Department" >
+                                                <option value=""> Choose Option</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -91,9 +108,18 @@
 
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-md-11">
+                                        <div class="form-group col-md-8">
                                             <label for="">Additionals Facitilies Needed</label>
-                                            <input type="text" class="form-control" id="facilities" >
+                                            <select class="form-control" id="facilities">
+                                                <option value=""> Choose option </option>
+                                                @foreach($facilities as $row)
+                                                    <option value="{{ $row -> id }}"> {{ $row -> facilities_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="">Quantity In Need</label>
+                                            <input type="text" class="form-control" id="quantity" >
                                         </div>
                                         <div class="form-group col-md-1">
                                             <label for="">&nbsp;</label>
@@ -111,6 +137,7 @@
                                                     <tr class="text-center">
                                                         <th>ID</th>
                                                         <th>Additionals Details</th>
+                                                        <th>Quantity</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                     </thead>
@@ -158,11 +185,14 @@
             var ctr = 1;
             function add_additional(){
 
-                var facValue = $('#facilities').val();
+                var facText = $('#facilities option:selected').text();
+                var facValue = $('#facilities option:selected').val();
+                var facQty = $('#quantity').val();
 
                 var details = "<tr class='text-center'>" +
                     "<td>" + ctr + "</td>" +
-                    "<td>" +facValue+" <input type='hidden' name='additional[]' value='"+facValue+"'></td>" +
+                    "<td>" +facText+" <input type='hidden' name='additional[]' value='"+facValue+"'></td>" +
+                    "<td>" +facQty+" <input type='hidden' name='qty[]' value='"+facQty+"'></td>" +
                     "<td width='5'><button type='button' class='form-control btn-danger btn btn-sm' id='remove'>-</button></td>"+
                     "</tr>";
 
@@ -231,6 +261,25 @@
 
                $('#useDate').attr('min', maxDate);
            }
+
+           /* For division department ajax */
+
+            $('#Division').on('change', function(){
+
+                $id =  $('#Division option:selected').attr("division_type");
+
+                $.ajax({
+
+                    type:"GET",
+                    url: '/viewDepartment/' + $id,
+                    success: function(data) {
+                        $('#Department').empty().append("<option value=''> Choose option </option>")
+                        $('#Department').append(data.option);
+                    }
+
+                });
+
+            })
 
         });
 
