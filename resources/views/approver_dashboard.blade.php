@@ -118,6 +118,7 @@
             calendar.render();
         });
 
+
     </script>
 
 @endsection

@@ -30,7 +30,7 @@
                         <div class="row">
                             <h5>
                                 <div class="text-center">
-                                    <span> Event : </span> &nbsp;
+                                    <span> Event Place: </span> &nbsp;
                                     <span id="title"></span>
                                 </div>
                             </h5>
@@ -102,7 +102,7 @@
                 ],
                 events: [
                     @foreach($data as $list)
-                        {  start: '{{ $list -> reservation_start }}', end: '{{ $list -> reservation_end }}', title: '{{ $list->lastname }} , {{ $list -> firstname }} - Purpose : {{ $list -> reservation_purpose }} ' },
+                        {  start: '{{ $list -> reservation_start }}', end: '{{ $list -> reservation_end }}', title: '{{ $list -> place_name }} ' },
                     @endforeach
                 ],
                 eventClick:  function(info) {

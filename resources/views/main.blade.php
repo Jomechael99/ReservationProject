@@ -16,6 +16,18 @@
 @include('partials._javascript')
 @yield('scripts')
 
+<script>
+    $(document).ready(function(){
+
+        $('.tableScript').DataTable( {
+            "paging":   false,
+            "ordering": false,
+            "info":     false
+        } );
+
+    });
+</script>
+
 </body>
 
 </html>

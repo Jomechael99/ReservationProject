@@ -35,5 +35,8 @@
 <script src="{{ asset('js/sweetalert2.all.min.js')}}"></script>
 <script src="{{ asset('js/sweetalert2.min.js')}}"></script>
 
+{{-- Datatables --}}
+<script src="{{ asset('datatables/datatables.js')}}"></script>
+
 <!-- fullCalendar 2.2.5 -->
 <script src='{{ asset('lib/main.js')}}'></script>

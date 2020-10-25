@@ -119,7 +119,7 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">Quantity In Need</label>
-                                            <input type="text" class="form-control" id="quantity" >
+                                            <input type="number" class="form-control" id="quantity" >
                                         </div>
                                         <div class="form-group col-md-1">
                                             <label for="">&nbsp;</label>
@@ -203,6 +203,8 @@
 
             $('#additionalButton').on('click', function(){
                 add_additional();
+                $('#facilities').prop('selectedIndex', 0);
+                $('#quantity').val("");
             });
 
             $(document).on('click', '#remove', function(){

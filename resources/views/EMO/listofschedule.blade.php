@@ -52,6 +52,7 @@
                                                 <td>
                                                     <div class="btn-group-vertical">
                                                         <a href="{{ route('viewEmoListApproved', $data->reservation_id) }}" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp;View Schedule</a>
+                                                        <a href="{{ route('viewEditApproval', $data->reservation_id) }}" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp;Edit Schedule</a>
                                                         <a href="{{ route('getFile' , $data->name ?? ""  ) }}" class="btn btn-success"><i class="fas fa-download"></i>&nbsp;Download Document </a>
                                                         @if($data -> reservation_emo_status == 1)
                                                         @else

@@ -33,6 +33,8 @@ Route::post('Student-Schedule-Approving', ['uses' => 'ApproverController@schedul
 
 route::get('EMO/Student-Approval-List', ['uses' => 'EMOController@viewSchedule', 'as' => 'viewEmoList']);
 Route::get('EMO/Student-Approval-View/{id}',[ 'uses' => 'EMOController@viewofApproval', 'as' => 'viewEmoListApproved']);
+Route::get('EMO/Student-Approval-Edit/{id}',[ 'uses' => 'EMOController@viewEditApproval', 'as' => 'viewEditApproval']);
+Route::post('EMO/Student-Approval-Edit',[ 'uses' => 'EMOController@editApproval', 'as' => 'editApproval']);
 Route::post('EMO/Student-Schedule-Approving', ['uses' => 'EMOController@schedule_approving', 'as'=>'EmoApproving']);
 
 //Resources

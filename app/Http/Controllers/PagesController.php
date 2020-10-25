@@ -45,6 +45,7 @@ class PagesController extends Controller
             ->leftjoin('reservation_approver_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
             ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
             ->leftjoin('reservation_emo_status as emo', 'res.reservation_id', '=', 'emo.reservation_fk_id')
+            ->join('place_libraries as place', 'place.id', '=', 'res.facility_id')
             ->where('emo.reservation_emo_status', 1)
             ->get();
 
