@@ -19,6 +19,7 @@ class EMOController extends Controller
                     ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
                     ->leftjoin('reservation_emo_status as emo', 'res.reservation_id', '=', 'emo.reservation_fk_id')
                     ->where('res_status.reservation_status', 1)
+                    ->orderBy('reservation_id', 'desc')
                     ->get();
 
 

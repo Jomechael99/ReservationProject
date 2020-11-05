@@ -18,13 +18,11 @@ class ScheduleController extends Controller
     {
         //
 
-
-
-
         $schedule_data = db::table('reservation_details as a')
             ->join('reservation_emo_status as b', 'a.reservation_id', '=', 'b.reservation_fk_id')
             ->join('reservation_approver_status as c', 'a.reservation_id', '=', 'c.reservation_fk_id')
             ->where('a.user_id', Auth::user()->id)
+            ->orderBy('reservation_id', 'desc')
             ->get();
 
         return view('StudentPortal.Schedule.viewschedule')
@@ -78,89 +76,104 @@ class ScheduleController extends Controller
     {
         // Reservation Details
 
-        if($request->scheduledPlace == "7"){
+        if ($request->scheduledPlace == "7") {
             $others = $request->other_place;
-        }else{
+        } else {
             $others = "";
         }
 
-        $reservation_details_data = [
-            'user_id' => $request->ApplicantsId,
-            'facility_id' =>$request->scheduledPlace,
-            'reservation_date' => $request->useDate,
-            'reservation_start'=> date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeStart")),
-            'reservation_end'=>date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeEnd")),
-            'facility_others'=>$others,
-            'reservation_purpose'=>$request->Purpose,
-            'reservation_date_applied'=> $request->dateApplied,
-            'reservation_division' => $request->Division,
-            'reservation_department' => $request->Department
-        ];
+        $start_date = date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeStart"));
+        $end_date = date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeEnd"));
 
-        $id = db::table('reservation_details')
-            ->insertGetId($reservation_details_data);
+        $existing_data = db::table('reservation_details')
+            ->whereBetween('reservation_start', [$start_date, $end_date])
+            ->orWhereBetween('reservation_end', [$start_date, $end_date])
+            ->where('facility_id', $request->scheduledPlace)
+            ->get();
 
 
-        if($request->hasFile('fileDocument')) {
+        if (count($existing_data) >= 1) {
+            return response()->json(['status' => "existing"]);
+        } else {
 
-            $allowedfileExtension=['pdf','jpg','png','docx'];
+                $reservation_details_data = [
+                    'user_id' => $request->ApplicantsId,
+                    'facility_id' =>$request->scheduledPlace,
+                    'reservation_date' => $request->useDate,
+                    'reservation_start'=> $start_date,
+                    'reservation_end'=> $end_date,
+                    'facility_others'=>$others,
+                    'reservation_purpose'=>$request->Purpose,
+                    'reservation_date_applied'=> $request->dateApplied,
+                    'reservation_division' => $request->Division,
+                    'reservation_department' => $request->Department
+                ];
 
-            $files = $request->file('fileDocument');
+                $id = db::table('reservation_details')
+                    ->insertGetId($reservation_details_data);
+
+
+                if($request->hasFile('fileDocument')) {
+
+                    $allowedfileExtension=['pdf','jpg','png','docx'];
+
+                    $files = $request->file('fileDocument');
 
 
 
-            $filename =  'file-'.time().'.'.$files->getClientOriginalExtension();;
-            $extension = $files->getClientOriginalExtension();
+                    $filename =  'file-'.time().'.'.$files->getClientOriginalExtension();;
+                    $extension = $files->getClientOriginalExtension();
 
-            $check=in_array($extension,$allowedfileExtension);
+                    $check=in_array($extension,$allowedfileExtension);
 
-            $path = $files->storeAs('files', $filename);
+                    $path = $files->storeAs('files', $filename);
 
-            $file_data = [
-                'name' => $filename,
-                'reservation_fk_id' => $id
-            ];
-
-            $file_insert = db::table('reservation_details_file')
-                ->insert($file_data);
-        }
-
-        if( $request -> additional == ""){
-
-            $res_details_others = true;
-
-        }else{
-            for($i = 0 ; $i < count($request->additional); $i++){
-                $res_details_others = db::table('reservation_details_others')
-                    ->insert([
-                       'reservation_others_details' => $request->additional[$i],
-                        'facilities_qty' => $request->qty[$i],
+                    $file_data = [
+                        'name' => $filename,
                         'reservation_fk_id' => $id
+                    ];
+
+                    $file_insert = db::table('reservation_details_file')
+                        ->insert($file_data);
+                }
+
+                if( $request -> additional == ""){
+
+                    $res_details_others = true;
+
+                }else{
+                    for($i = 0 ; $i < count($request->additional); $i++){
+                        $res_details_others = db::table('reservation_details_others')
+                            ->insert([
+                               'reservation_others_details' => $request->additional[$i],
+                                'facilities_qty' => $request->qty[$i],
+                                'reservation_fk_id' => $id
+                            ]);
+                    }
+                }
+
+
+                $res_emo_status = db::table('reservation_emo_status')
+                    ->insert([
+                        'reservation_fk_id' => $id,
+                        'reservation_received_by' => "",
+                        'reservation_emo_status' => 0,
                     ]);
-            }
-        }
+
+                $res_approver = db::table('reservation_approver_status')
+                    ->insert([
+                        'reservation_fk_id' => $id,
+                        'reservation_status' => 2
+                    ]);
 
 
-        $res_emo_status = db::table('reservation_emo_status')
-            ->insert([
-                'reservation_fk_id' => $id,
-                'reservation_received_by' => "",
-                'reservation_emo_status' => 0,
-            ]);
-
-        $res_approver = db::table('reservation_approver_status')
-            ->insert([
-                'reservation_fk_id' => $id,
-                'reservation_status' => 2
-            ]);
-
-
-        if($res_details_others == true && $res_emo_status == true && $res_approver == true){
+        if ($res_details_others == true && $res_emo_status == true && $res_approver == true) {
             return response()->json(['status' => "success"]);
-        }else{
+        } else {
             return response()->json(['status' => "error"]);
         }
 
+    }
 
     }
 

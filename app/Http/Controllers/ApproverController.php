@@ -23,6 +23,7 @@ class ApproverController extends Controller
                     ->leftjoin('reservation_approver_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
                     ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
                     ->where('res.reservation_department', $apporver_department)
+                    ->orderBy('reservation_id', 'desc')
                     ->get();
             }else{ // College
                 $data_list = db::table('reservation_details as res')
@@ -30,6 +31,7 @@ class ApproverController extends Controller
                     ->leftjoin('reservation_approver_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
                     ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
                     ->where('res.reservation_division', $approver_division)
+                    ->orderBy('reservation_id', 'desc')
                     ->get();
             }
 

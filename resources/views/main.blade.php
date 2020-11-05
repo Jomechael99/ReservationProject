@@ -20,7 +20,7 @@
     $(document).ready(function(){
 
         $('.tableScript').DataTable( {
-            "paging":   false,
+            "paging":   true,
             "ordering": false,
             "info":     false
         } );

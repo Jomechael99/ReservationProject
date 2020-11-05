@@ -30,8 +30,8 @@
                                 <h3 class="card-title">Schedule List</h3>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover tableScript text-nowrap">
                                     <thead>
                                     <tr class="text-center">
                                         <th>Reservation ID

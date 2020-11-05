@@ -78,7 +78,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="">Division</label>
-                                            <select class="form-control" id="Division" name="Division" >
+                                            <select class="form-control" id="Division" name="Division" required>
                                                 <option value=""> Choose Option</option>
                                                 @foreach($division as $row)
                                                     <option value="{{ $row -> id }}" division_type="{{ $row -> division_type }}"> {{ $row -> division_name }}</option>
@@ -235,9 +235,12 @@
                             swal.fire("Schedule Successfully Added","","success").then(function(){
                                 window.history.back();
                             });
-
+                        }else if(response.status == "existing"){
+                            swal.fire("Existing Schedule","","warning").then(function(){
+                            });
                         }else{
-                            alert("Schedule Not Added");
+                            swal.fire("Scheduled Not Added","","error").then(function(){
+                            });
                         }
 
                     }
