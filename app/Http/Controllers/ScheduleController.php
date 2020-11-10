@@ -85,12 +85,18 @@ class ScheduleController extends Controller
         $start_date = date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeStart"));
         $end_date = date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeEnd"));
 
-        $existing_data = db::table('reservation_details')
-            ->whereBetween('reservation_start', [$start_date, $end_date])
-            ->orWhereBetween('reservation_end', [$start_date, $end_date])
-            ->where('facility_id', $request->scheduledPlace)
-            ->get();
+        // $existing_data = db::table('reservation_details')
+        //     ->where('facility_id', '=', $request->scheduledPlace)
+        //     ->where(DB::raw('( reservation_start between cast($start_date as DATETIME ) and cast( $end_date as DATETIME ) OR reservation_end between cast( $start_date as DATETIME ) and cast( $end_date as DATETIME ) )' ))
+        //     ->get();
 
+        $existing_data = db::table('reservation_details')
+            ->where('facility_id', $request->scheduledPlace)
+            ->where(function ($query) use ($start_date,$end_date) {
+                $query
+                ->whereBetween('reservation_start', [$start_date , $end_date])
+                ->orwhereBetween('reservation_end', [$start_date , $end_date]);
+            })->get();
 
         if (count($existing_data) >= 1) {
             return response()->json(['status' => "existing"]);

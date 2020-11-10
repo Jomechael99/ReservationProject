@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">Start</label>
-                                            <input type="time" class="form-control" id="timeStart" name="timeStart" min="09:00" max="21:00" >
+                                            <input type="time" class="form-control" id="timeStart" name="timeStart" min="07:00" max="21:00" >
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">End</label>

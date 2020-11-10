@@ -19,6 +19,57 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Places Selection</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Minimal style -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!-- radio -->
+                                <div class="form-group clearfix text-center">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="place1" name="place" class="custom-control-input" value="1">
+                                        <label class="custom-control-label" for="place1">Auditorium</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="place2" name="place" class="custom-control-input" value="2">
+                                        <label class="custom-control-label" for="place2">Quadrangle</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="place3" name="place" class="custom-control-input" value="3">
+                                        <label class="custom-control-label" for="place3">University Gym</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix text-center">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="place4" name="place" class="custom-control-input" value="4">
+                                        <label class="custom-control-label" for="place4">Student Lounge</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="place5" name="place" class="custom-control-input" value="5">
+                                        <label class="custom-control-label" for="place5">Tower Lounge</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="place6" name="place" class="custom-control-input" value="6">
+                                        <label class="custom-control-label" for="place6">Review Center (G-36)</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="place7" name="place" class="custom-control-input" value="7">
+                                        <label class="custom-control-label" for="place7">Others</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                </div>
+            </div>
+        </div>
         <div id="calendarModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -73,7 +124,63 @@
 
     <script>
 
-        document.addEventListener('DOMContentLoaded', function() {
+        $(document).ready(function(){
+            $('.custom-control-input').on('click', function(){
+
+                var id = $(this).attr('value');
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+
+                console.log(color);
+
+                $.ajax({
+
+                    type:"GET",
+                    url: '/Calendar/Place/' + id,
+                    success: function(data) {
+
+                        var events = [];
+
+
+                        for(var i = 0 ; i < data.length ; i++ ){
+                            events.push({
+                                title: data[i].lastname +","+ data[i].firstname +"- Purpose "+ data[i].reservation_purpose ,
+                                start: data[i].reservation_start, // will be parsed,
+                                end: data[i].reservation_end,
+                                color: color
+                            });
+                        }
+
+                        var calendarEl = document.getElementById('calendar');
+                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                            now: '{{ date("Y-m-d") }}',
+                            selectable: true,
+                            initialView: 'dayGridMonth',
+                            events: events,
+                            eventClick: function(info) {
+                                var data = info.event;
+                                $('#title').text(data.title);
+                                $('#start').text(moment(data.start).format('MMM Do h:mm A'));
+                                $('#end').text(moment(data.end).format('MMM Do h:mm A'));
+                                $('#calendarModal').modal();
+                            },
+
+
+                        });
+
+                        calendar.render();
+
+                    }
+                });
+
+            })
+
+        });
+
+        /*document.addEventListener('DOMContentLoaded', function() {
 
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -116,7 +223,7 @@
             });
 
             calendar.render();
-        });
+        });*/
 
 
     </script>

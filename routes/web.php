@@ -50,11 +50,11 @@ Route::get('viewDivision/{id}', ['uses' => 'Ajax\RegisterAjax@viewDivision' , 'a
 
 Route::get('viewDepartment/{id}', ['uses' => 'Ajax\ScheduleController@viewDepartment', 'as' => 'viewDepartment']);
 
+// Main Controller Ajax
 
+Route::get('Calendar/Place/{id}', ['uses' => 'Ajax\MainController@calendar_place', 'as' => 'calendar_place']);
 
 // Google Account
-
-
 
 Route::get('google', [ 'uses' => 'GoogleController@redirectToGoogle' , 'as' => 'redirect']);
 Route::get('auth/google/callback', ['uses' => 'GoogleController@handleGoogleCallback' , 'as' => 'callback']);
