@@ -29,8 +29,20 @@
                     <!-- Minimal style -->
                     <div class="row">
                         <div class="col-sm-12">
+                            <div class="form-group">
+                                <select name="place" id="place" class="form-control place">
+                                    <option value="">Choose Option</option>
+                                    <option value="1">Auditorium</option>
+                                    <option value="2">Quadrangle</option>
+                                    <option value="3">University Gym</option>
+                                    <option value="4">Student Lounge</option>
+                                    <option value="5">Tower Lounge</option>
+                                    <option value="6">Review Center (G-36)</option>
+                                    <option value="7">Others</option>
+                                </select>
+                            </div>
                             <!-- radio -->
-                            <div class="form-group clearfix text-center">
+                            <!-- <div class="form-group clearfix text-center">
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="place1" name="place" class="custom-control-input" value="1">
                                     <label class="custom-control-label" for="place1">Auditorium</label>
@@ -61,7 +73,7 @@
                                     <input type="radio" id="place7" name="place" class="custom-control-input" value="7">
                                     <label class="custom-control-label" for="place7">Others</label>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -120,9 +132,9 @@
 
 
     $(document).ready(function(){
-        $('.custom-control-input').on('click', function(){
+        $('.place').on('change', function(){
 
-            var id = $(this).attr('value');
+            var id = $('#place option:selected').attr("value");
             var letters = '0123456789ABCDEF';
             var color = '#';
             for (var i = 0; i < 6; i++) {

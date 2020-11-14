@@ -30,37 +30,17 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <!-- radio -->
-                                <div class="form-group clearfix text-center">
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="place1" name="place" class="custom-control-input" value="1">
-                                        <label class="custom-control-label" for="place1">Auditorium</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="place2" name="place" class="custom-control-input" value="2">
-                                        <label class="custom-control-label" for="place2">Quadrangle</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="place3" name="place" class="custom-control-input" value="3">
-                                        <label class="custom-control-label" for="place3">University Gym</label>
-                                    </div>
-                                </div>
-                                <div class="form-group clearfix text-center">
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="place4" name="place" class="custom-control-input" value="4">
-                                        <label class="custom-control-label" for="place4">Student Lounge</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="place5" name="place" class="custom-control-input" value="5">
-                                        <label class="custom-control-label" for="place5">Tower Lounge</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="place6" name="place" class="custom-control-input" value="6">
-                                        <label class="custom-control-label" for="place6">Review Center (G-36)</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="place7" name="place" class="custom-control-input" value="7">
-                                        <label class="custom-control-label" for="place7">Others</label>
-                                    </div>
+                                <div class="form-group">
+                                    <select name="place" id="place" class="form-control place">
+                                        <option value="">Choose Option</option>
+                                        <option value="1">Auditorium</option>
+                                        <option value="2">Quadrangle</option>
+                                        <option value="3">University Gym</option>
+                                        <option value="4">Student Lounge</option>
+                                        <option value="5">Tower Lounge</option>
+                                        <option value="6">Review Center (G-36)</option>
+                                        <option value="7">Others</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -125,9 +105,9 @@
     <script>
 
         $(document).ready(function(){
-            $('.custom-control-input').on('click', function(){
+            $('.place').on('change', function(){
 
-                var id = $(this).attr('value');
+                var id = $('#place option:selected').attr("value");
                 var letters = '0123456789ABCDEF';
                 var color = '#';
                 for (var i = 0; i < 6; i++) {
@@ -161,11 +141,13 @@
                             initialView: 'dayGridMonth',
                             events: events,
                             eventClick: function(info) {
+
                                 var data = info.event;
                                 $('#title').text(data.title);
                                 $('#start').text(moment(data.start).format('MMM Do h:mm A'));
                                 $('#end').text(moment(data.end).format('MMM Do h:mm A'));
                                 $('#calendarModal').modal();
+
                             },
 
 
