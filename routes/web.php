@@ -18,6 +18,7 @@ route::get('Homepage', ['uses' => 'PagesController@viewHomepage', 'as' => 'Homep
 route::get('StudentLogin' ,['uses' => 'PagesController@viewStudentLogin' , 'as' => 'StudentLogin']);
 route::get('Dashboard' ,['uses' => 'PagesController@viewDashboard' , 'as' => 'Dashboard']);
 Route::get('AccountLogout', ['uses' => 'PagesController@accountLogout', 'as' => 'AccountLogout']);
+route::get('TicketingLogin', ['uses' => 'PagesController@viewTicketingLogin', 'as' => 'TicketingLogin']);
 
 // User Controller
 // Route::post('StudentRegister', ['uses' => 'UserController@postRegister', 'as' => 'StudentRegister']);
@@ -36,6 +37,11 @@ Route::get('EMO/Student-Approval-View/{id}',[ 'uses' => 'EMOController@viewofApp
 Route::get('EMO/Student-Approval-Edit/{id}',[ 'uses' => 'EMOController@viewEditApproval', 'as' => 'viewEditApproval']);
 Route::post('EMO/Student-Approval-Edit',[ 'uses' => 'EMOController@editApproval', 'as' => 'editApproval']);
 Route::post('EMO/Student-Schedule-Approving', ['uses' => 'EMOController@schedule_approving', 'as'=>'EmoApproving']);
+
+// Ticketing Controller
+
+Route::get('Ticketing/Items/{id}', ['uses' => 'TicketingController@viewListItems', 'as' => 'viewListItems']);
+Route::post('Ticketing/Items/Status/Add', ['uses' => 'TicketingController@addListItemsStatus' , 'as' => 'addListItemsStatus']);
 
 //Resources
 

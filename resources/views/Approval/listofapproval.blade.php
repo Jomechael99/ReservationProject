@@ -52,7 +52,7 @@
                                                 <td>{{ date('Y-m-d h:i A', strtotime($data->reservation_end)) }}</td>
                                                 <td>
                                                     @if($data -> reservation_status == 0)
-                                                        <span class="float-right badge bg-error">Disapproved</span>
+                                                        <span class="float-right badge bg-error">Disapprove</span>
                                                     @elseif($data -> reservation_status == 1)
                                                         <span class="float-right badge bg-success">Approved</span>
                                                     @else

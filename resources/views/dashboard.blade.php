@@ -2,7 +2,12 @@
 
 @section('content')
 
+
+
 <div class="content-wrapper" style="min-height: 583px;">
+    <style>
+
+    </style>
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -38,7 +43,6 @@
                                     <option value="4">Student Lounge</option>
                                     <option value="5">Tower Lounge</option>
                                     <option value="6">Review Center (G-36)</option>
-                                    <option value="7">Others</option>
                                 </select>
                             </div>
                             <!-- radio -->
@@ -167,6 +171,7 @@
                             selectable: true,
                             initialView: 'dayGridMonth',
                             events: events,
+                            hiddenDays: [0],
                             eventClick: function(info) {
                                 var data = info.event;
                                 $('#start').text(moment(data.start).format('MMM Do h:mm A'));
@@ -186,7 +191,7 @@
 
     });
 
-  /*  document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
 
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -194,6 +199,7 @@
             now: '{{ date("Y-m-d") }}',
             selectable: true,
             initialView: 'dayGridMonth',
+            hiddenDays: [0],
             events: [
                     @foreach($data as $list) {
                     start: '{{ $list -> reservation_start }}',
@@ -214,7 +220,7 @@
         });
 
         calendar.render();
-    })*/
+    })
 
 
 </script>

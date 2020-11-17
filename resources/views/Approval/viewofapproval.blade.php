@@ -132,7 +132,7 @@
                                 </div>
                                 @if($sched -> reservation_status == 2)
                                     <div class="card-footer text-center">
-                                        <button class="btn btn-info btn-sm  col-md-4" type="button" id="btnSubmit"> Approved/Disapprove Schedule </button>
+                                        <button class="btn btn-info btn-sm  col-md-4" type="button" id="btnSubmit"> Approved/Disapproved Schedule </button>
                                     </div>
                                 @endif
                             </form>

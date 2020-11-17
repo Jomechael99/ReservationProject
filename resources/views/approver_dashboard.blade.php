@@ -39,7 +39,6 @@
                                         <option value="4">Student Lounge</option>
                                         <option value="5">Tower Lounge</option>
                                         <option value="6">Review Center (G-36)</option>
-                                        <option value="7">Others</option>
                                     </select>
                                 </div>
                             </div>
@@ -114,8 +113,6 @@
                     color += letters[Math.floor(Math.random() * 16)];
                 }
 
-                console.log(color);
-
                 $.ajax({
 
                     type:"GET",
@@ -138,6 +135,7 @@
                         var calendar = new FullCalendar.Calendar(calendarEl, {
                             now: '{{ date("Y-m-d") }}',
                             selectable: true,
+                            hiddenDays: [0],
                             initialView: 'dayGridMonth',
                             events: events,
                             eventClick: function(info) {
@@ -162,7 +160,7 @@
 
         });
 
-        /*document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
 
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -171,6 +169,7 @@
                 scrollTime: '00:00', // undo default 6am scrollTime
                 selectable: true,
                 aspectRatio: 1.8,
+                hiddenDays: [0],
                 initialView: 'dayGridMonth',
                 views: {
                     resourceTimelineThreeDays: {
@@ -205,7 +204,7 @@
             });
 
             calendar.render();
-        });*/
+        });
 
 
     </script>

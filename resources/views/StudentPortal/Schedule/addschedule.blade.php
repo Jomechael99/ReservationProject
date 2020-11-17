@@ -12,7 +12,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('Dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Scheduled Form</li>
+                            <li class="breadcrumb-item active">Reservation Form</li>
                         </ol>
                     </div>
                 </div>

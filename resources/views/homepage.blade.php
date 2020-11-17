@@ -45,7 +45,6 @@
     <img src="{{ asset('img/Homepage Images/49652614_345409099627982_9019432575730450432_n.png') }}" width="100" height="100">
 </div>
 <div class="login-box" style="width: auto">
-
     <!-- /.login-logo -->
     <div class="col-md-12">
         <div class="">
@@ -56,7 +55,7 @@
 </div>
 <div class="login-box">
     <div class="center">
-        <a type="button"  class="btn btn-success btn-lg btn-block">TICKETING MAINTENANCE</a>
+        <a type="button" href="{{ route('TicketingLogin') }}"  class="btn btn-success btn-lg btn-block">TICKETING MAINTENANCE</a>
     </div>
     <div class="center">
         <a type="button" href="{{ route('StudentLogin') }}" stlye='text-color: black;'class="btn btn-success btn-lg btn-block">RESERVATION FACILITIES</a>

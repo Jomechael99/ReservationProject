@@ -37,7 +37,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('Dashboard');
         }else{
-            return redirect()->route('StudentLogin');
+            return redirect()->route('Homepage');
         }
     }
 }
