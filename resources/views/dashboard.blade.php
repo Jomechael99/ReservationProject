@@ -43,6 +43,7 @@
                                     <option value="4">Student Lounge</option>
                                     <option value="5">Tower Lounge</option>
                                     <option value="6">Review Center (G-36)</option>
+                                    <option value="7">All Facilities</option>
                                 </select>
                             </div>
                             <!-- radio -->
