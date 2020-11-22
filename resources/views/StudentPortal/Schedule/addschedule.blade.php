@@ -286,6 +286,16 @@
 
             })
 
+            const picker = document.getElementById('useDate');
+            picker.addEventListener('input', function(e){
+                var day = new Date(this.value).getUTCDay();
+                if([0].includes(day)){
+                    e.preventDefault();
+                    this.value = '';
+                    swal.fire("Sunday is not applicable", "", "error");
+                }
+            });
+
         });
 
     </script>

@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Student Scheduled Form </h1>
+                        <h1> Scheduled Form </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -40,7 +40,7 @@
                                             <input type="date" class="form-control input" id="dateApplied" name="dateApplied" value="{{ $sched->reservation_date_applied }}" placeholder="Date Applied" readonly>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="">Date & Time EMO Request Receive ( For Emo Use Only ) </label>
+                                            <label for="">Date & Time EMO Request Received ( For EMO Use Only ) </label>
                                             <input type="text" class="form-control input" name="datetimeEMO" id="datetimeEMO" value="{{ date('m-d-Y h:i:s A', strtotime($sched -> reservation_approved_time))}} " readonly>
                                         </div>
                                     </div>
@@ -51,9 +51,9 @@
                                                 <option value=""> Choose option </option>
 
                                                 @foreach($place as $data2)
-
-                                                    <option value="{{ $data2 -> id }}" {{ ( $data2->id == $sched -> facility_id) ? 'selected' : '' }} readonly> {{ $data2 -> place_name }} </option>
+                                                    <option value="{{ $data2 -> id }}" {{ ( $data2->id == $sched -> facility_id) ? 'selected' : '' }}> {{ $data2 -> place_name }} </option>
                                                 @endforeach
+
                                             </select>
                                         </div>
                                         <div class="form-group col-md-12" id="other_place_details" hidden>
@@ -203,7 +203,7 @@
 
             $('.input').attr('readonly', true);
 
-            $('#scheduledPlace').attr('disabled', true);
+            //$('#scheduledPlace').attr('disabled', true);
 
             $('.btn-edit').on('click', function(){
                 $(this).closest('tr').find('input,button').prop('readonly', false);

@@ -18,7 +18,6 @@ class EMOController extends Controller
                     ->leftjoin('reservation_approver_status as res_status', 'res.reservation_id', '=', 'res_status.reservation_fk_id')
                     ->leftJoin('reservation_details_file as e', 'res.reservation_id', '=', 'e.reservation_fk_id')
                     ->leftjoin('reservation_emo_status as emo', 'res.reservation_id', '=', 'emo.reservation_fk_id')
-                    ->where('res_status.reservation_status', 1)
                     ->orderBy('reservation_id', 'desc')
                     ->get();
 
@@ -123,6 +122,7 @@ class EMOController extends Controller
 
              $updated_reservation_details = [
                  'reservation_date' => $request->useDate,
+                 'facility_id' => $request->scheduledPlace,
                  'reservation_start'=> date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeStart")),
                  'reservation_end'=>date('Y-m-d H:i:s', strtotime("$request->useDate $request->timeEnd")),
              ];

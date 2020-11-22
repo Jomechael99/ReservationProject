@@ -136,7 +136,6 @@
                         var calendar = new FullCalendar.Calendar(calendarEl, {
                             now: '{{ date("Y-m-d") }}',
                             selectable: true,
-                            hiddenDays: [0],
                             initialView: 'dayGridMonth',
                             events: events,
                             eventClick: function(info) {
@@ -161,7 +160,7 @@
 
         });
 
-        /*document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
 
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -205,7 +204,7 @@
             });
 
             calendar.render();
-        });*/
+        });
 
 
     </script>

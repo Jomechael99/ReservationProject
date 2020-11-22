@@ -172,7 +172,6 @@
                             selectable: true,
                             initialView: 'dayGridMonth',
                             events: events,
-                            hiddenDays: [0],
                             eventClick: function(info) {
                                 var data = info.event;
                                 $('#start').text(moment(data.start).format('MMM Do h:mm A'));
