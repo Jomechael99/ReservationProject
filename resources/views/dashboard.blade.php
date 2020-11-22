@@ -199,7 +199,6 @@
             now: '{{ date("Y-m-d") }}',
             selectable: true,
             initialView: 'dayGridMonth',
-            hiddenDays: [0],
             events: [
                     @foreach($data as $list) {
                     start: '{{ $list -> reservation_start }}',

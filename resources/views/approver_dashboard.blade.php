@@ -169,7 +169,6 @@
                 scrollTime: '00:00', // undo default 6am scrollTime
                 selectable: true,
                 aspectRatio: 1.8,
-                hiddenDays: [0],
                 initialView: 'dayGridMonth',
                 views: {
                     resourceTimelineThreeDays: {
