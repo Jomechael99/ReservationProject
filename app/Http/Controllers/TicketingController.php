@@ -17,6 +17,8 @@ class TicketingController extends Controller
             ->where('reservation_fk_id', $id)
             ->get();
 
+
+
         return view('Ticketing.viewitems')
             ->with('items' , $items);
 
@@ -61,6 +63,36 @@ class TicketingController extends Controller
         }
 
         return response()->json(array('status' => "success"));
+
+    }
+
+    function addScheduleTicket(Request $request){
+
+        $id = $request->id;
+        $desc = $request->desc;
+
+        $data = [
+            'res_fk_id' => $id,
+            'res_description' => $desc,
+            'res_status' => 1
+        ];
+
+        db::table('reservation_ticket_status')
+            ->insert($data);
+
+        return response()->json(array('status' => "success"));
+    }
+
+    function processTicket($id){
+
+        db::table('reservation_ticket_status')
+            ->where('id', $id)
+            ->update([
+                'res_status' => 2
+            ]);
+        
+        return response()->json(array('status' => "success"));
+
 
     }
 }

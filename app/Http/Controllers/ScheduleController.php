@@ -21,6 +21,7 @@ class ScheduleController extends Controller
         $schedule_data = db::table('reservation_details as a')
             ->join('reservation_emo_status as b', 'a.reservation_id', '=', 'b.reservation_fk_id')
             ->join('reservation_approver_status as c', 'a.reservation_id', '=', 'c.reservation_fk_id')
+            ->leftjoin('reservation_ticket_status as d', 'd.res_fk_id', '=' , 'a.reservation_id')
             ->where('a.user_id', Auth::user()->id)
             ->orderBy('reservation_id', 'desc')
             ->get();

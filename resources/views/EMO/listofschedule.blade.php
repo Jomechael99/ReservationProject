@@ -86,7 +86,6 @@
 
                 var id = $(this).attr('btn-id');
 
-                console.log(id);
 
                 Swal.fire({
                     title: 'What do you want to do ?',

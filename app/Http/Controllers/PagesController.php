@@ -80,13 +80,21 @@ class PagesController extends Controller
             ->orderBy('reservation_id', 'desc')
             ->get();
 
+        $others2 = db::table('reservation_details as a')
+            ->select('e.id as ticket_id', 'reservation_id', 'firstname', 'lastname' , 'reservation_date' , 'res_status', 'res_description')
+            ->join('users as c' , 'a.user_id' , '='  , 'c.id')
+            ->leftjoin('reservation_ticket_status as e', 'a.reservation_id', '=' ,'e.res_fk_id')
+            ->orderBy('reservation_id', 'desc')
+            ->where('res_status' , '!=', null)
+            ->get();
+
 
         if(Auth::user() -> approver == 1 || Auth::user() -> approver == 2 ){
             return view('approver_dashboard')
                 ->with(['place' => $place_libraries, 'data' => $data_list]);
         }elseif(Auth::user() -> approver == 3){
             return view('Ticketing.viewticketing')
-                ->with(['data' => $others]);
+                ->with(['data' => $others , 'data2' => $others2]);
         }
         else{
             return view('dashboard')

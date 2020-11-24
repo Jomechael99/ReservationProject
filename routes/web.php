@@ -42,6 +42,8 @@ Route::post('EMO/Student-Schedule-Approving', ['uses' => 'EMOController@schedule
 
 Route::get('Ticketing/Items/{id}', ['uses' => 'TicketingController@viewListItems', 'as' => 'viewListItems']);
 Route::post('Ticketing/Items/Status/Add', ['uses' => 'TicketingController@addListItemsStatus' , 'as' => 'addListItemsStatus']);
+Route::post('Ticketing/Schedule/Status', ['uses' => 'TicketingController@addScheduleTicket', 'as'=> 'addScheduleStatus']);
+Route::get('Ticketing/Schedule/Process/{id}', ['uses' => 'TicketingController@processTicket', 'as' => 'processTicketStatus']);
 
 //Resources
 
