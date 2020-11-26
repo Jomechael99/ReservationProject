@@ -247,6 +247,7 @@
 
                 $('#additionTable').append(details);
 
+
             }
 
             $('#scheduledForm').submit(function(e){

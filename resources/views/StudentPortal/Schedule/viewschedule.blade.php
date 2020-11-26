@@ -62,15 +62,16 @@
                                                     <td>
                                                         <div class="btn-group-vertical">
                                                             <a href="{{ route('Schedule.show', $data->reservation_id) }}" class="btn btn-primary">View Schedule</a>
-                                                            {{--@if( date('Y-m-d h:i A', strtotime($data->reservation_start)) < date('Y-m-d h:i A') && date('Y-m-d h:i A', strtotime($data->reservation_end)) > date('Y-m-d h:i A')  )--}}
+                                                            @if( date('Y-m-d h:i A', strtotime($data->reservation_end)) > date('Y-m-d h:i A')  )
                                                                 @if($data -> res_status == 1)
                                                                     <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#btnDetails"><i class=""></i> View Ticket </button>
                                                                 @elseif($data -> res_status == 2)
                                                                     <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#btnDetails"><i class=""></i> View Ticket </button>
                                                                 @else
                                                                     <button class="btn btn-info" type="button" data-toggle="modal" data-target="#btnSubmit"><i class=""></i> Add Ticket </button>
+
                                                                 @endif
-                                                            {{--@endif--}}
+                                                            @endif
                                                         </div>
                                                     </td>
                                                 </tr>

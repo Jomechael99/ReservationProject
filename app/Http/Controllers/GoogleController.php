@@ -13,8 +13,8 @@ class GoogleController extends Controller
 {
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->with(["prompt" => "select_account"])->redirect();
-        /*return Socialite::driver('google')->with(["prompt" => "select_account", "hd"=>"my.jru.edu"])->redirect();*/
+        /*return Socialite::driver('google')->with(["prompt" => "select_account"])->redirect();*/
+        return Socialite::driver('google')->with(["prompt" => "select_account", "hd"=>"my.jru.edu"])->redirect();
     }
 
     /**

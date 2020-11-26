@@ -90,8 +90,9 @@ class TicketingController extends Controller
             ->update([
                 'res_status' => 2
             ]);
-
+        
         return response()->json(array('status' => "success"));
+
 
     }
 }

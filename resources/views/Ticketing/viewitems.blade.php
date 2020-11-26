@@ -86,7 +86,12 @@
                                             <input type="hidden" name="status" value="1">
                                             <button class="btn btn-info btn-sm  col-md-4" type="submit" value="1" id="btnSubmit"> Change to Complete </button>
                                         </div>
-                                    @elseif($data -> reservation_status == null)
+                                    @elseif($data -> reservation_status == 2)
+                                        <div class="card-footer text-center">
+                                            <input type="hidden" name="status" value="2">
+                                            <button class="btn btn-info btn-sm  col-md-4" type="submit"  value="2" id="btnSubmit"> Change to Finish </button>
+                                        </div>
+                                    @else
                                         <div class="card-footer text-center">
                                             <input type="hidden" name="status" value="3">
                                             <button class="btn btn-info btn-sm  col-md-4" type="submit" value="3" id="btnSubmit"> Change to Ongoing </button>
