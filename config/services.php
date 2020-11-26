@@ -30,16 +30,16 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    /*'google' => [
+    'google' => [
         'client_id' => '754748345647-aegag7ssoiq04hcevdfirt6c9ib1vm2h.apps.googleusercontent.com',
         'client_secret' => '8l5Ul5Cfe7uV-CHA-1DyQ7bl',
         'redirect' => 'http://reservationproject.com/auth/google/callback',
-    ],*/
+    ],
 
-    'google' => [
+    /*'google' => [
         'client_id' => '754748345647-l6cs7lui6377pcodu4a55h1dojn43euh.apps.googleusercontent.com',
         'client_secret' => 'MaPcdHPHlzrkhK-V2pCJFC0K',
         'redirect' => 'http://web-reservation001.herokuapp.com/auth/google/callback',
-    ],
+    ],*/
 
 ];

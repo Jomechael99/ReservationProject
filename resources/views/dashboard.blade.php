@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
 <div class="content-wrapper" style="min-height: 583px;">
     <style>
 

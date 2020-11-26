@@ -10,6 +10,7 @@ class EMOController extends Controller
 {
     //
     public function viewSchedule(){
+
         if(Auth::user()->approver == 2){
 
 
