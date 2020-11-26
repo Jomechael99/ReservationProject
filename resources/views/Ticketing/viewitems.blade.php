@@ -64,7 +64,7 @@
                                                             @if($data -> reservation_status == 1)
                                                                 <td> {{ $row -> reservation_others_before }}</td>
                                                                 <td> <input type="textarea" name="after[]" value=""></td>
-                                                            @elseif($data -> reservation_status == 2)
+                                                            @elseif($data -> reservation_status == null)
                                                                 <td> {{ $row -> reservation_others_before }}</td>
                                                                 <td> {{ $row -> reservation_other_after }}</td>
                                                             @else
